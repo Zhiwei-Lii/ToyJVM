@@ -25,10 +25,10 @@ public class ClassPath {
     }
 
     private void parseBootAndExtClassPath(String jreOption) {
-	String jreLibPath = jreOption + "lib" + "/*";
+	String jreLibPath = joinPath(jreOption, "lib/*");
 	bootClassPath = EntryFactory.newEntry(jreLibPath);
 
-	String jreExtPath = jreOption + "lib/ext" + "/*";
+	String jreExtPath = joinPath(jreOption, "lib/ext/*");
 	extClassPath = EntryFactory.newEntry(jreExtPath);
     }
 
@@ -40,4 +40,11 @@ public class ClassPath {
 	userClassPath = EntryFactory.newEntry(cpOption);
     }
 
+    private String joinPath(String jreOption, String postfix) {
+	if (jreOption.endsWith("/")) {
+	    return jreOption + postfix;
+	} else {
+	    return jreOption + "/" + postfix;
+	}
+    }
 }

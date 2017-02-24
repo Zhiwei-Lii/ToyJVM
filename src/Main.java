@@ -1,3 +1,4 @@
+import classfile.ClassFile;
 import classpath.ClassPath;
 
 public class Main {
@@ -7,7 +8,6 @@ public class Main {
 	
 	String className = cmd.class_.replaceAll("\\.", "/");
 	byte[] result = cp.readClass(className);
-
     }
 
     public static void main(String[] args) {

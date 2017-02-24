@@ -27,5 +27,4 @@ public class CompositeEntry implements Entry {
 
         return result;
     }
-
 }

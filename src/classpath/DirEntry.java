@@ -2,24 +2,18 @@ package classpath;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 
 public class DirEntry implements Entry {
     String absDir;
 
-    /**
-     * path以"/"结尾, 如"./"
-     * @param path
-     */
     public DirEntry(String path) {
         absDir = path;
     }
 
     /**
-     * className是class文件的相对路径, 如java/lang/Object.class
      * 
      * @param className
-     * @return
+     * 		className以.class结尾, 如java/lang/Object.class
      */
     public byte[] readClass(String className) {
         String absClassPath = joinPath(absDir, className);
@@ -43,5 +37,4 @@ public class DirEntry implements Entry {
             return absDir + "/" + className;
         }
     }
-
 }

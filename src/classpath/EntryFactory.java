@@ -3,10 +3,7 @@ package classpath;
 public class EntryFactory {
 
     public static Entry newEntry(String path) {
-	if (isDirEntry(path)) {
-	    return new DirEntry(path);
-
-	} else if (isZipEntry(path)) {
+	if (isZipEntry(path)) {
 	    return new ZipEntry(path);
 
 	} else if (isCompositeEntry(path)) {
@@ -16,12 +13,8 @@ public class EntryFactory {
 	    return new WildcardEntry(path);
 
 	} else {
-	    throw new Error("EntryFactory:: newEntry");
+	    return new DirEntry(path);
 	}
-    }
-
-    private static boolean isDirEntry(String path) {
-	return path.endsWith("/");
     }
 
     private static boolean isZipEntry(String path) {
