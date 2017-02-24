@@ -8,6 +8,7 @@ public class Main {
 	
 	String className = cmd.class_.replaceAll("\\.", "/");
 	byte[] result = cp.readClass(className);
+	System.out.println(result.length);
     }
 
     public static void main(String[] args) {

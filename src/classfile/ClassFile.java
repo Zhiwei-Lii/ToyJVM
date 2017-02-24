@@ -61,6 +61,14 @@ public class ClassFile {
 	    interfaces[i] = reader.readU2();
 	}
     }
-
+    
+    private void setFields(ClassReader reader){
+	int n = (int)reader.readU2();
+	fields = new MemberInfo[n];
+	
+	for(int i=0; i<n; i++){
+	    fields[i] = MemberInfo(reader, cp);
+	}
+    }
 
 }

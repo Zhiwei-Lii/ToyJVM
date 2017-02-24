@@ -3,14 +3,13 @@ package classfile;
 public class ClassReader {
     private byte[] data;
     private int index;
-    
-    public ClassReader(byte[] classData){
+
+    public ClassReader(byte[] classData) {
 	this.data = classData;
 	this.index = 0;
     }
 
     public long readU1() {
-	System.out.println(Byte.toUnsignedLong(data[index]));
 	return Byte.toUnsignedLong(data[index++]);
     }
 
@@ -25,20 +24,7 @@ public class ClassReader {
 	long low = readU2();
 	return (high << 16) | low;
     }
-    
-    /*
-    public long[] readU2List(){
-	long n = readU2();
 
-	long[] list = new long[(int)n];
-	for(int i=0; i<n; i++){
-	    list[i] = readU2();
-	}
-	
-	return list;
-    }
-    */
-    
     public boolean hasMoreByte() {
 	return index < data.length;
     }
