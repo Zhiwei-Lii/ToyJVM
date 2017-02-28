@@ -25,6 +25,13 @@ public class ClassReader {
 	return (high << 16) | low;
     }
 
+    // 可能出问题
+    public long readU8() {
+	long high = readU4();
+	long low = readU4();
+	return (high << 32) | low;
+    }
+
     public boolean hasMoreByte() {
 	return index < data.length;
     }
