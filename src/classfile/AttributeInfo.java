@@ -4,19 +4,21 @@ public abstract class AttributeInfo {
 
 }
 
+// test
 class DeprecatedAttribute extends AttributeInfo {
     public DeprecatedAttribute(ClassReader reader){
 	reader.readU4();
     }
 }
 
+// test
 class SyntheticAttribute extends AttributeInfo {
     public SyntheticAttribute(ClassReader reader){
 	reader.readU4();
     }
 }
 
-/* The name of source file */
+// test
 class SourceFileAttribute extends AttributeInfo {
     long sourceFileIndex;
     ConstantPool cp;
@@ -32,6 +34,7 @@ class SourceFileAttribute extends AttributeInfo {
     }
 }
 
+// test
 class ConstantValueAttribute extends AttributeInfo {
     long constantValueIndex;
 
@@ -41,6 +44,7 @@ class ConstantValueAttribute extends AttributeInfo {
     }
 }
 
+// test
 class CodeAttribute extends AttributeInfo {
     ConstantPool cp;
     long maxStack;
@@ -71,7 +75,6 @@ class CodeAttribute extends AttributeInfo {
 
     private void setExceptionTable(ClassReader reader) {
 	int exceptionLength = (int) reader.readU2();
-	System.out.println("ExceptionLength is " + exceptionLength);
 	exceptionTable = new ExceptionTableEntry[exceptionLength];
 
 	for (int i = 0; i < exceptionLength; i++) {
@@ -81,7 +84,6 @@ class CodeAttribute extends AttributeInfo {
 
     private void setAttributeInfos(ClassReader reader, ConstantPool cp) {
 	int length = (int) reader.readU2();
-	System.out.println("Code::attribute num is "+length);
 	attributes = new AttributeInfo[length];
 	for (int i = 0; i < length; i++) {
 	    attributes[i] = AttributeFactory.newAttributeInfo(reader, cp);
@@ -103,6 +105,7 @@ class ExceptionTableEntry {
     }
 }
 
+// test
 class ExceptionsAttribute extends AttributeInfo {
     long[] exceptionIndexTable;
 
@@ -171,6 +174,7 @@ class LocalVariableTableEntry {
     }
 }
 
+// test
 class UnparsedAttribute extends AttributeInfo {
     public UnparsedAttribute(ClassReader reader) {
 	long length = reader.readU4();

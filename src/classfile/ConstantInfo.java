@@ -4,6 +4,7 @@ public abstract class ConstantInfo {
 
 }
 
+// test
 class ConstantIntegerInfo extends ConstantInfo {
     long val;
 
@@ -12,6 +13,7 @@ class ConstantIntegerInfo extends ConstantInfo {
     }
 }
 
+// untest
 class ConstantFloatInfo extends ConstantInfo {
     double val;
 
@@ -22,6 +24,7 @@ class ConstantFloatInfo extends ConstantInfo {
     }
 }
 
+// untest
 class ConstantLongInfo extends ConstantInfo {
     long val;
 
@@ -31,6 +34,7 @@ class ConstantLongInfo extends ConstantInfo {
     }
 }
 
+// untest
 class ConstantDoubleInfo extends ConstantInfo {
     double val;
 
@@ -40,6 +44,7 @@ class ConstantDoubleInfo extends ConstantInfo {
     }
 }
 
+// test
 class ConstantUtf8Info extends ConstantInfo {
     String str;
 
@@ -59,6 +64,7 @@ class ConstantUtf8Info extends ConstantInfo {
     }
 }
 
+// test
 class ConstantStringInfo extends ConstantInfo {
     long strIndex;
     
@@ -67,6 +73,7 @@ class ConstantStringInfo extends ConstantInfo {
     }
 }
 
+// test
 class ConstantClassInfo extends ConstantInfo {
     public long nameIndex;
     
@@ -76,6 +83,7 @@ class ConstantClassInfo extends ConstantInfo {
 
 }
 
+// test
 class ConstantNameAndTypeInfo extends ConstantInfo {
     long nameIndex;
     long descriptorIndex;
@@ -86,6 +94,7 @@ class ConstantNameAndTypeInfo extends ConstantInfo {
     }
 }
 
+// test
 class ConstantMemberrefInfo extends ConstantInfo {
     long classIndex;
     long nameAndTypeIndex;
@@ -96,18 +105,21 @@ class ConstantMemberrefInfo extends ConstantInfo {
     }
 }
 
+// test
 class ConstantFieldrefInfo extends ConstantMemberrefInfo {
     public ConstantFieldrefInfo(ClassReader reader) {
 	super(reader);
     }
 }
 
+// test
 class ConstantMethodrefInfo extends ConstantMemberrefInfo {
     public ConstantMethodrefInfo(ClassReader reader) {
 	super(reader);
     }
 }
 
+// test
 class ConstantInterfaceMethodrefInfo extends ConstantMemberrefInfo {
     public ConstantInterfaceMethodrefInfo(ClassReader reader) {
 	super(reader);

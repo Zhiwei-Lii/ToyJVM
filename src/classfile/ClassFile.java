@@ -75,7 +75,6 @@ public class ClassFile {
 	fields = new MemberInfo[n];
 	
 	for(int i=0; i<n; i++){
-	    System.out.println("fields : "+i);
 	    fields[i] = new MemberInfo(reader, constantPool);
 	}
     }
@@ -85,9 +84,7 @@ public class ClassFile {
 	methods = new MemberInfo[n];
 	
 	for(int i=0; i<n; i++){
-	    System.out.println("methods : "+i);
 	    methods[i] = new MemberInfo(reader, constantPool);
-	    System.out.println("------------------------");
 	}
     }
 

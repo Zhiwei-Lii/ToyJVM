@@ -17,7 +17,6 @@ public class MemberInfo {
 
     private void setAttributes(ClassReader reader, ConstantPool cp) {
 	int n = (int) reader.readU2();
-	System.out.println("attributes count is "+n);
 
 	attributes = new AttributeInfo[n];
 	for (int i = 0; i < n; i++) {
