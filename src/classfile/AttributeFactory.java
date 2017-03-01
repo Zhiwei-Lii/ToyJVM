@@ -4,6 +4,7 @@ public class AttributeFactory {
 
     public static AttributeInfo newAttributeInfo(ClassReader reader, ConstantPool cp){
 	long attrNameIndex = reader.readU2();
+	System.out.println("attrNameIndex is "+attrNameIndex);
 	String attrName = cp.getUtf8(attrNameIndex);
 	System.out.println("attrName is "+attrName);
 	

@@ -14,12 +14,14 @@ public class ZipEntry implements Entry {
 	try {
 	    ZipFile zFile = new ZipFile(absPath);
 	    java.util.zip.ZipEntry classFile = zFile.getEntry(className);
-
+	    InputStream in = zFile.getInputStream(classFile);
 
 	    byte[] result = new byte[(int) classFile.getSize()];
 
-	    InputStream in = zFile.getInputStream(classFile);
-	    in.read(result);
+	    int n = 0;
+	    do{
+		n = in.read(result, n, result.length);
+	    } while(n!=-1);
 
 	    in.close();
 	    zFile.close();

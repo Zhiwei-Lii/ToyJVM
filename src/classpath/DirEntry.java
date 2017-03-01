@@ -22,7 +22,12 @@ public class DirEntry implements Entry {
 
         try {
             FileInputStream in = new FileInputStream(file);
-            in.read(result);
+
+	    int n = 0;
+	    do{
+		n = in.read(result, n, result.length);
+	    } while(n!=-1);
+
             in.close();
             return result;
         } catch (Exception e) {

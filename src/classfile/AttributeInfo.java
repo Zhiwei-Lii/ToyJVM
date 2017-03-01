@@ -100,11 +100,6 @@ class ExceptionTableEntry {
 	endPc = reader.readU2();
 	handlerPc = reader.readU2();
 	catchType = reader.readU2();
-	
-	System.out.println("startPc "+startPc);
-	System.out.println("endPc "+endPc);
-	System.out.println("handlerPc "+handlerPc);
-	System.out.println("catchType "+catchType);
     }
 }
 

@@ -22,7 +22,6 @@ public class ClassFile {
 	setMagic(reader);
 	setVersion(reader);
 	setConstantPool(reader);
-	//printConstantPool();
 	setAccessFlags(reader);
 	setThisClass(reader);
 	setSuperClass(reader);
@@ -32,14 +31,6 @@ public class ClassFile {
 	setAttributes(reader);
     }
     
-    private void printConstantPool(){
-	System.out.println("hello");
-	int i = 0;
-	for(ConstantInfo c:constantPool.constantInfos){
-	    System.out.println((i++)+" "+c.toString());
-	}
-    }
-
     private void setConstantPool(ClassReader reader) {
 	constantPool = new ConstantPool(reader);
     }
