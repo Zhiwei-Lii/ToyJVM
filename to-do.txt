@@ -1,3 +1,4 @@
-# u1 u2 u4全都用long来模拟s, ClassReader类
+# 因为java没有无符号类型, 所以u1 u2 u4全都用long来模拟s, ClassReader类
 
-对double和long的支持可能出现问题
+对double, long, float的支持可能出现问题, 暂时不想支持! 
+第三第四章可以找到支持这些的地方, 第五章关于double, long, float的指令都没有支持
