@@ -33,13 +33,16 @@ public class Interpreter {
 	
 	while(true){
 	    int pc = frame.pc();
+	    thread.setPc(pc);
 
 	    reader.reset(code, pc);
 	    long opcode = reader.readU1();
 	    Instruction inst = InstructionFactory.newInstruction(opcode);
 	    inst.fetchOperands(reader);
 	    frame.setPc(reader.pc());
-	    
+
+	    inst.execute(frame);
+
 	    System.out.println();
 	    System.out.println();
 	    System.out.println("LocalVars:");
@@ -51,8 +54,6 @@ public class Interpreter {
 	    System.out.println("OperandStack:");
 	    OperandStack stack = frame.operandStack();
 	    stack.print();
-
-	    inst.execute(frame);
 	}
 	
     }
