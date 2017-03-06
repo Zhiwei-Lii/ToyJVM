@@ -3,12 +3,12 @@ package instructions.base;
 public class BytecodeReader {
     byte[] code;
     int pc;
-    
-    public void reset(byte[] code, int pc){
+
+    public void reset(byte[] code, int pc) {
 	this.code = code;
 	this.pc = pc;
     }
-    
+
     public BytecodeReader(byte[] code) {
 	this.code = code;
 	this.pc = 0;
@@ -28,5 +28,15 @@ public class BytecodeReader {
 	long high = readU2();
 	long low = readU2();
 	return (high << 16) | low;
+    }
+
+    public void skipPadding() {
+	while (pc % 4 != 0) {
+	    readU1();
+	}
+    }
+
+    public int pc() {
+	return pc;
     }
 }

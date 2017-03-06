@@ -1,5 +1,12 @@
 package instructions.constants;
 
-public class ICONST_5 {
+import instructions.base.NoOperandsInstruction;
+import rtda.Frame;
+
+public class ICONST_5 extends NoOperandsInstruction{
+
+    public void execute(Frame frame) {
+	frame.operandStack().pushInt(5);
+    }
 
 }

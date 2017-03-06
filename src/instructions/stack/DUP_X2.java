@@ -11,7 +11,9 @@ public class DUP_X2 extends NoOperandsInstruction {
 	OperandStack stack = frame.operandStack();
 	Slot slot1 = stack.popSlot();
 	Slot slot2 = stack.popSlot();
+	Slot slot3 = stack.popSlot();
 	stack.pushSlot(slot1);
+	stack.pushSlot(slot3);
 	stack.pushSlot(slot2);
 	stack.pushSlot(slot1);
     }

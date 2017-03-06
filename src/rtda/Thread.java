@@ -2,14 +2,15 @@ package rtda;
 import java.util.Stack;
 
 public class Thread {
-    int pc;
-    Stack<Frame> stack;
+    //private int pc;
+    private Stack<Frame> stack;
     
     public Thread(){
-	pc = 0;
+	//pc = 0;
 	stack = new Stack<Frame>();
     }
     
+    /*
     public int pc(){
 	return pc;
     }
@@ -17,7 +18,7 @@ public class Thread {
     public void setPc(int pc){
 	this.pc = pc;
     }
-    
+    */
     public void pushFrame(Frame frame){
 	stack.push(frame);
     }

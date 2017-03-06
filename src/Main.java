@@ -1,4 +1,5 @@
 import classfile.ClassFile;
+import classfile.Interpreter;
 import classpath.ClassPath;
 
 public class Main {
@@ -10,7 +11,8 @@ public class Main {
 	byte[] result = cp.readClass(className);
 	
 	ClassFile classFile = new ClassFile(result);
-	//System.out.println(classFile.constantPool.getUtf8(classFile.thisClass));
+	Interpreter.interpret(classFile.methods[1]);
+
     }
 
     public static void main(String[] args) {

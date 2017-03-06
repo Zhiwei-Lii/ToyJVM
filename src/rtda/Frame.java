@@ -1,20 +1,34 @@
 package rtda;
 
 public class Frame {
-    LocalVars localVars; // local variables table
+    LocalVars localVars;
     OperandStack operandStack;
+    Thread thread;
+    int pc;
 
-    public Frame(int maxLocals, int maxStack){
-	localVars = new LocalVars(maxLocals);
-	operandStack = new OperandStack(maxStack);
+    public Frame(Thread thread, int maxLocals, int maxStack) {
+	this.thread = thread;
+	this.localVars = new LocalVars(maxLocals);
+	this.operandStack = new OperandStack(maxStack);
     }
-    
-    public LocalVars localVars(){
+
+    public LocalVars localVars() {
 	return localVars;
     }
-    
-    public OperandStack operandStack(){
+
+    public OperandStack operandStack() {
 	return operandStack;
     }
 
+    public Thread thread() {
+	return thread;
+    }
+    
+    public int pc() {
+	return pc;
+    }
+    
+    public void setPc(int pc){
+	this.pc = pc;
+    }
 }

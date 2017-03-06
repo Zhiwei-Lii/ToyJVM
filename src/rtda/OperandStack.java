@@ -6,7 +6,16 @@ public class OperandStack {
     
     public OperandStack(int maxSize){
 	slots = new Slot[maxSize];
+	for(int i=0; i<slots.length; i++){
+	    slots[i] = new Slot();
+	}
 	top = 0;
+    }
+    
+    public void print(){
+	for(int i=top-1; i>-1; i--){
+	    System.out.println(slots[i].num);
+	}
     }
     
     public void pushInt(int val){

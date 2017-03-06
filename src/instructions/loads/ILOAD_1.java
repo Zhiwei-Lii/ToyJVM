@@ -1,5 +1,13 @@
 package instructions.loads;
 
-public class ILOAD_1 {
+import instructions.base.NoOperandsInstruction;
+import rtda.Frame;
+
+public class ILOAD_1 extends NoOperandsInstruction {
+
+    public void execute(Frame frame) {
+	int val = frame.localVars().getInt(1);
+	frame.operandStack().pushInt(val);
+    }
 
 }

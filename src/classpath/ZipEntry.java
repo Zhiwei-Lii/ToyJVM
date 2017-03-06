@@ -18,10 +18,13 @@ public class ZipEntry implements Entry {
 
 	    byte[] result = new byte[(int) classFile.getSize()];
 
+	    int hasRead = 0;
 	    int n = 0;
-	    do{
-		n = in.read(result, n, result.length);
-	    } while(n!=-1);
+
+	    do {
+		n = in.read(result, hasRead, result.length);
+		hasRead += n;
+	    } while (n != -1 && hasRead < result.length);
 
 	    in.close();
 	    zFile.close();

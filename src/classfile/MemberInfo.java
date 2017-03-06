@@ -1,5 +1,10 @@
 package classfile;
 
+/**
+ * field and method share this class
+ * @author misen
+ *
+ */
 public class MemberInfo {
     ConstantPool cp;
     long accessFlags;
@@ -15,6 +20,15 @@ public class MemberInfo {
 	setAttributes(reader, cp);
     }
 
+    public CodeAttribute codeAttribute(){
+	for(AttributeInfo a: attributes){
+	    if(a instanceof CodeAttribute){
+		return (CodeAttribute)a;
+	    }
+	}
+	return null;
+    }
+    
     private void setAttributes(ClassReader reader, ConstantPool cp) {
 	int n = (int) reader.readU2();
 
@@ -23,4 +37,5 @@ public class MemberInfo {
 	    attributes[i] = AttributeFactory.newAttributeInfo(reader, cp);
 	}
     }
+    
 }
