@@ -1,24 +1,71 @@
 package classfile;
 
+import classfile.attribute.AttributeFactory;
+import classfile.attribute.AttributeInfo;
+
+/**
+ * This class is the model of JVM Class Specification
+ * 
+ * @author misen
+ *
+ */
+
 public class ClassFile {
-    public long magic;
-    public long minorVersion;
-    public long majorVersion;
-    public ConstantPool constantPool;
-    public long accessFlags;
-    public long thisClass;
-    public long superClass;
-    public long[] interfaces;
-    public MemberInfo[] fields;
-    public MemberInfo[] methods;
-    public AttributeInfo[] attributes;
-    
-    public ClassFile(byte[] classData){
+    long magic;
+    long minorVersion;
+    long majorVersion;
+    ConstantPool constantPool;
+    long accessFlags;
+    long thisClass;
+    long superClass;
+    long[] interfaces;
+    MemberInfo[] fields;
+    MemberInfo[] methods;
+    AttributeInfo[] attributes;
+
+    public ClassFile(byte[] classData) {
 	ClassReader reader = new ClassReader(classData);
 	set(reader);
     }
+
+    public int accessFlags() {
+	return (int) accessFlags;
+    }
+
+    public String thisClassName() {
+	return constantPool.getUtf8(thisClass);
+    }
+
+    public String superClassName() {
+	return constantPool.getUtf8(superClass);
+    }
+
+    public String[] interfaceNames() {
+	String[] interfaceNames = new String[interfaces.length];
+	for (int i = 0; i < interfaceNames.length; i++) {
+	    interfaceNames[i] = constantPool.getUtf8(interfaces[i]);
+	}
+
+	return interfaceNames;
+    }
+
+    public ConstantPool constantPool() {
+	return constantPool;
+    }
+
+    public MemberInfo[] fields(){
+	return fields;
+    }
     
-    private void set(ClassReader reader){
+    public MemberInfo[] methods(){
+	return methods;
+    }
+    
+    public AttributeInfo[] attributes(){
+	return attributes;
+    }
+
+    private void set(ClassReader reader) {
 	setMagic(reader);
 	setVersion(reader);
 	setConstantPool(reader);
@@ -30,60 +77,59 @@ public class ClassFile {
 	setMethods(reader);
 	setAttributes(reader);
     }
-    
+
     private void setConstantPool(ClassReader reader) {
 	constantPool = new ConstantPool(reader);
     }
 
-    private void setMagic(ClassReader reader){
+    private void setMagic(ClassReader reader) {
 	magic = reader.readU4();
 
-	if(Long.toHexString(magic).equals("0xCAFEBABE")){
+	if (Long.toHexString(magic).equals("0xCAFEBABE")) {
 	    throw new Error("java.lang.ClassFormatError: magic!");
 	}
     }
-    
-    private void setVersion(ClassReader reader){
+
+    private void setVersion(ClassReader reader) {
 	minorVersion = reader.readU2();
 	majorVersion = reader.readU2();
     }
 
-    
-    private void setAccessFlags(ClassReader reader){
+    private void setAccessFlags(ClassReader reader) {
 	accessFlags = reader.readU2();
     }
-    
-    private void setThisClass(ClassReader reader){
+
+    private void setThisClass(ClassReader reader) {
 	thisClass = reader.readU2();
     }
-    
-    private void setSuperClass(ClassReader reader){
+
+    private void setSuperClass(ClassReader reader) {
 	superClass = reader.readU2();
     }
-    
-    private void setInterfaces(ClassReader reader){
-	int n = (int)reader.readU2();
+
+    private void setInterfaces(ClassReader reader) {
+	int n = (int) reader.readU2();
 	interfaces = new long[n];
-	
-	for(int i=0; i<n; i++){
+
+	for (int i = 0; i < n; i++) {
 	    interfaces[i] = reader.readU2();
 	}
     }
-    
-    private void setFields(ClassReader reader){
-	int n = (int)reader.readU2();
+
+    private void setFields(ClassReader reader) {
+	int n = (int) reader.readU2();
 	fields = new MemberInfo[n];
-	
-	for(int i=0; i<n; i++){
+
+	for (int i = 0; i < n; i++) {
 	    fields[i] = new MemberInfo(reader, constantPool);
 	}
     }
 
-    private void setMethods(ClassReader reader){
-	int n = (int)reader.readU2();
+    private void setMethods(ClassReader reader) {
+	int n = (int) reader.readU2();
 	methods = new MemberInfo[n];
-	
-	for(int i=0; i<n; i++){
+
+	for (int i = 0; i < n; i++) {
 	    methods[i] = new MemberInfo(reader, constantPool);
 	}
     }

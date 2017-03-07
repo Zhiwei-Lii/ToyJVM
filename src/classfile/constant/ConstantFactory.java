@@ -1,4 +1,7 @@
-package classfile;
+package classfile.constant;
+
+import classfile.ClassReader;
+import classfile.ConstantPool;
 
 public class ConstantFactory {
     static final int CONSTANT_Class = 7;

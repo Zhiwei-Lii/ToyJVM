@@ -1,5 +1,8 @@
 package classfile;
 
+import classfile.constant.ConstantFactory;
+import classfile.constant.ConstantInfo;
+
 public class ConstantPool {
     ConstantInfo[] constantInfos;
 

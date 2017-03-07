@@ -1,7 +1,12 @@
 package classfile;
 
+import classfile.attribute.AttributeFactory;
+import classfile.attribute.AttributeInfo;
+import classfile.attribute.CodeAttribute;
+
 /**
  * field and method share this class
+ * 
  * @author misen
  *
  */
@@ -20,10 +25,22 @@ public class MemberInfo {
 	setAttributes(reader, cp);
     }
 
-    public CodeAttribute codeAttribute(){
-	for(AttributeInfo a: attributes){
-	    if(a instanceof CodeAttribute){
-		return (CodeAttribute)a;
+    public int accessFlags() {
+	return (int) accessFlags;
+    }
+
+    public String name() {
+	return cp.getUtf8(nameIndex);
+    }
+
+    public String descriptorIndex() {
+	return cp.getUtf8(descriptorIndex);
+    }
+
+    public CodeAttribute codeAttribute() {
+	for (AttributeInfo a : attributes) {
+	    if (a instanceof CodeAttribute) {
+		return (CodeAttribute) a;
 	    }
 	}
 	return null;
@@ -37,5 +54,5 @@ public class MemberInfo {
 	    attributes[i] = AttributeFactory.newAttributeInfo(reader, cp);
 	}
     }
-    
+
 }

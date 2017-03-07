@@ -1,5 +1,7 @@
 package rtda;
 
+import rtda.heap.Object;
+
 public class OperandStack {
     int top;
     Slot[] slots;

@@ -2,7 +2,7 @@ package instructions.stores;
 
 import instructions.base.Index8Instruction;
 import rtda.Frame;
-import rtda.Object;
+import rtda.heap.Object;
 
 public class ASTORE extends Index8Instruction {
 

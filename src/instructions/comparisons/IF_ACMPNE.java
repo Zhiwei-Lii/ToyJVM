@@ -2,7 +2,7 @@ package instructions.comparisons;
 
 import instructions.base.BranchInstruction;
 import rtda.Frame;
-import rtda.Object;
+import rtda.heap.Object;
 
 public class IF_ACMPNE extends BranchInstruction {
 

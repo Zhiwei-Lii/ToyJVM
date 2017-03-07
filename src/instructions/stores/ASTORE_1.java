@@ -2,7 +2,7 @@ package instructions.stores;
 
 import instructions.base.NoOperandsInstruction;
 import rtda.Frame;
-import rtda.Object;
+import rtda.heap.Object;
 
 public class ASTORE_1 extends NoOperandsInstruction {
     public void execute(Frame frame) {

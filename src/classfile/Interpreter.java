@@ -1,5 +1,6 @@
 package classfile;
 import rtda.Thread;
+import classfile.attribute.CodeAttribute;
 import instructions.base.BytecodeReader;
 import instructions.base.Instruction;
 import instructions.base.InstructionFactory;

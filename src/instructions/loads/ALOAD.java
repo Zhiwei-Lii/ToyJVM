@@ -2,7 +2,7 @@ package instructions.loads;
 
 import instructions.base.Index8Instruction;
 import rtda.Frame;
-import rtda.Object;
+import rtda.heap.Object;
 
 public class ALOAD extends Index8Instruction {
 
