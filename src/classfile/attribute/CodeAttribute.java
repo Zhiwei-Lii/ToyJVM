@@ -1,18 +1,18 @@
 package classfile.attribute;
 
 import classfile.ClassReader;
-import classfile.ConstantPool;
+import classfile.RawConstantPool;
 
 // test
 public class CodeAttribute extends AttributeInfo {
-    ConstantPool cp;
+    RawConstantPool cp;
     long maxStack;
     long maxLocals;
     long[] code;
     ExceptionTableEntry[] exceptionTable;
     AttributeInfo[] attributes;
 
-    public CodeAttribute(ClassReader reader, ConstantPool cp) {
+    public CodeAttribute(ClassReader reader, RawConstantPool cp) {
 	reader.readU4();
 	this.cp = cp;
 	maxStack = reader.readU2();
@@ -58,7 +58,7 @@ public class CodeAttribute extends AttributeInfo {
 	}
     }
 
-    private void setAttributeInfos(ClassReader reader, ConstantPool cp) {
+    private void setAttributeInfos(ClassReader reader, RawConstantPool cp) {
 	int length = (int) reader.readU2();
 	attributes = new AttributeInfo[length];
 	for (int i = 0; i < length; i++) {

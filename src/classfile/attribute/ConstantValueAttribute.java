@@ -10,4 +10,8 @@ public class ConstantValueAttribute extends AttributeInfo {
 	reader.readU4();
 	constantValueIndex = reader.readU2();
     }
+
+    public int constantValueIndex() {
+	return (int) constantValueIndex;
+    }
 }

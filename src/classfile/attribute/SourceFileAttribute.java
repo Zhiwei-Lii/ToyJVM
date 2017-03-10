@@ -1,14 +1,14 @@
 package classfile.attribute;
 
 import classfile.ClassReader;
-import classfile.ConstantPool;
+import classfile.RawConstantPool;
 
 //test
 public class SourceFileAttribute extends AttributeInfo {
     long sourceFileIndex;
-    ConstantPool cp;
+    RawConstantPool cp;
 
-    public SourceFileAttribute(ClassReader reader, ConstantPool cp) {
+    public SourceFileAttribute(ClassReader reader, RawConstantPool cp) {
 	reader.readU4(); // pass attribute_length
 	this.cp = cp;
 	sourceFileIndex = reader.readU2();

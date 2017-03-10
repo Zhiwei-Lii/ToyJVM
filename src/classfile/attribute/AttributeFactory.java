@@ -1,11 +1,11 @@
 package classfile.attribute;
 
 import classfile.ClassReader;
-import classfile.ConstantPool;
+import classfile.RawConstantPool;
 
 public class AttributeFactory {
 
-    public static AttributeInfo newAttributeInfo(ClassReader reader, ConstantPool cp){
+    public static AttributeInfo newAttributeInfo(ClassReader reader, RawConstantPool cp){
 	long attrNameIndex = reader.readU2();
 	String attrName = cp.getUtf8(attrNameIndex);
 	System.out.println("attrName is "+attrName);

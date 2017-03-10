@@ -20,4 +20,8 @@ public class ConstantUtf8Info extends ConstantInfo {
 	    throw new Error("ConstantInfo :: ConstantUtf8Info wrong!");
 	}
     }
+
+    public String string() {
+	return str;
+    }
 }

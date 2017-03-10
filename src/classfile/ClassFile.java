@@ -14,7 +14,7 @@ public class ClassFile {
     long magic;
     long minorVersion;
     long majorVersion;
-    ConstantPool constantPool;
+    RawConstantPool constantPool;
     long accessFlags;
     long thisClass;
     long superClass;
@@ -49,7 +49,7 @@ public class ClassFile {
 	return interfaceNames;
     }
 
-    public ConstantPool constantPool() {
+    public RawConstantPool rawConstantPool() {
 	return constantPool;
     }
 
@@ -79,7 +79,7 @@ public class ClassFile {
     }
 
     private void setConstantPool(ClassReader reader) {
-	constantPool = new ConstantPool(reader);
+	constantPool = new RawConstantPool(reader);
     }
 
     private void setMagic(ClassReader reader) {

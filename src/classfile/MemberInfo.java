@@ -3,6 +3,7 @@ package classfile;
 import classfile.attribute.AttributeFactory;
 import classfile.attribute.AttributeInfo;
 import classfile.attribute.CodeAttribute;
+import classfile.attribute.ConstantValueAttribute;
 
 /**
  * field and method share this class
@@ -11,13 +12,13 @@ import classfile.attribute.CodeAttribute;
  *
  */
 public class MemberInfo {
-    ConstantPool cp;
+    RawConstantPool cp;
     long accessFlags;
     long nameIndex;
     long descriptorIndex;
     AttributeInfo[] attributes;
 
-    public MemberInfo(ClassReader reader, ConstantPool cp) {
+    public MemberInfo(ClassReader reader, RawConstantPool cp) {
 	this.cp = cp;
 	this.accessFlags = reader.readU2();
 	this.nameIndex = reader.readU2();
@@ -45,8 +46,17 @@ public class MemberInfo {
 	}
 	return null;
     }
+
+    public ConstantValueAttribute constantValueAttribute() {
+	for (AttributeInfo a : attributes) {
+	    if (a instanceof ConstantValueAttribute) {
+		return (ConstantValueAttribute) a;
+	    }
+	}
+	return null;
+    }
     
-    private void setAttributes(ClassReader reader, ConstantPool cp) {
+    private void setAttributes(ClassReader reader, RawConstantPool cp) {
 	int n = (int) reader.readU2();
 
 	attributes = new AttributeInfo[n];

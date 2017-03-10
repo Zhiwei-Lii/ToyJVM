@@ -1,7 +1,7 @@
 package classfile.constant;
 
 import classfile.ClassReader;
-import classfile.ConstantPool;
+import classfile.RawConstantPool;
 
 public class ConstantFactory {
     static final int CONSTANT_Class = 7;
@@ -19,7 +19,7 @@ public class ConstantFactory {
     static final int CONSTANT_MethodType = 16;
     static final int CONSTANT_InvokeDynamic = 18;
 
-    public static ConstantInfo newConstantInfo(ClassReader reader, ConstantPool cp) {
+    public static ConstantInfo newConstantInfo(ClassReader reader, RawConstantPool cp) {
 	int tag = (int) reader.readU1();
 
 	switch (tag) {

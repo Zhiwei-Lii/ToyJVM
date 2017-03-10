@@ -1,5 +1,8 @@
 package rtda.heap;
 
-public class Object {
+import rtda.Slot;
 
+public class Object {
+    Class cl;
+    Slot[] slots;
 }

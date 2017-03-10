@@ -1,4 +1,4 @@
-package rtda.heap;
+package rtda.heap.constant;
 
 public interface Constant {
 

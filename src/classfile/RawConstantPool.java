@@ -1,13 +1,16 @@
 package classfile;
 
+import classfile.constant.ConstantDoubleInfo;
 import classfile.constant.ConstantFactory;
 import classfile.constant.ConstantInfo;
+import classfile.constant.ConstantLongInfo;
+import classfile.constant.ConstantUtf8Info;
 
-public class ConstantPool {
+public class RawConstantPool {
     ConstantInfo[] constantInfos;
 
-    public ConstantPool(ClassReader reader) {
-	int n = (int)reader.readU2();
+    public RawConstantPool(ClassReader reader) {
+	int n = (int) reader.readU2();
 
 	constantInfos = new ConstantInfo[n];
 
@@ -26,15 +29,19 @@ public class ConstantPool {
     public ConstantInfo getConstantInfo(long index) {
 	return constantInfos[(int) index];
     }
-    
+
     /**
      * 
      * @param index
      * @return the str form of constantUtf8
      */
-    public String getUtf8(long index){
-	ConstantUtf8Info utf8 = (ConstantUtf8Info)getConstantInfo(index);
-	return utf8.str;
+    public String getUtf8(long index) {
+	ConstantUtf8Info utf8 = (ConstantUtf8Info) getConstantInfo(index);
+	return utf8.string();
+    }
+
+    public ConstantInfo[] constantInfos() {
+	return constantInfos;
     }
 
     /*

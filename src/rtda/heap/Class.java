@@ -1,7 +1,8 @@
 package rtda.heap;
 
 import classfile.ClassFile;
-import classfile.ConstantPool;
+import classfile.RawConstantPool;
+import rtda.Slot;
 
 /**
  * This class is the refinement of ClassFile
@@ -17,20 +18,20 @@ public class Class {
     String[] interfaceNames;
     ConstantPool constantPool;
     Field[] fields;
-    Methdod[] methods;
+    Method[] methods;
     rtda.heap.ClassLoader loader;
     Class superClass;
     Class[] interfaces;
     int instanceSlotCount;
     int staticSlotCount;
-    Slots staticVars;
+    Slot[] staticVars;
 
     public Class(ClassFile cf) {
 	accessFlags = cf.accessFlags();
 	name = cf.thisClassName();
 	superClassName = cf.superClassName();
 	interfaceNames = cf.interfaceNames();
-	constantPool = newConstantPool(cf);
+	constantPool = new ConstantPool(this, cf.rawConstantPool());
 	fields = newFields(cf);
 	methods = newMethods(cf);
     }
@@ -74,8 +75,8 @@ public class Class {
 	}
 	return fs;
     }
-    
-    private Method[] newMethods(ClassFile cf){
+
+    private Method[] newMethods(ClassFile cf) {
 	Method[] ms = new Method[cf.methods().length];
 	for (int i = 0; i < ms.length; i++) {
 	    ms[i] = new Method(this, cf.methods()[i]);
