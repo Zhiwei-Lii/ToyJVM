@@ -12,7 +12,7 @@ public class ConstantInterfaceMethodRef {
     Method method;
     
     public ConstantInterfaceMethodRef(){
-	
+	// to do
     }
 
 }

@@ -8,4 +8,8 @@ public class ConstantInteger implements Constant {
     public ConstantInteger(ConstantIntegerInfo i) {
 	this.val = i.value();
     }
+
+    public int val() {
+	return val;
+    }
 }

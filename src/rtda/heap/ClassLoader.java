@@ -2,10 +2,10 @@ package rtda.heap;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import classfile.ClassFile;
 import classpath.ClassPath;
 import rtda.Slot;
+import rtda.heap.constant.*;
 
 public class ClassLoader {
     ClassPath classPath;
@@ -104,23 +104,24 @@ public class ClassLoader {
 	    }
 	}
     }
-    
-    private void initStaticFinalVar(Class cl, Field f){
+
+    private void initStaticFinalVar(Class cl, Field f) {
 	Slot[] vars = cl.staticVars;
 	ConstantPool cp = cl.constantPool;
 	int cpIndex = f.constantValueIndex;
 	int slotId = f.slotId;
-	
-	if(cpIndex >0){
+
+	if (cpIndex > 0) {
 	    String des = f.descriptor;
-	    if(des.equals("Z")||des.equals("B") || des.equals("C")||des.equals("S")||des.equals("I")){
-		int val = (int)cp.getConstant(cpIndex);
-		vars[slotId] = val;
-	    }
-	    else if(des.equals("Ljava/lang/String;"){
+	    if (des.equals("I")) {
+		int val = ((ConstantInteger) cp.getConstant(cpIndex)).val();
+		vars[slotId].setNum(val);
+	    } else if (des.equals("Ljava/lang/String;")) {
 		// to do
+		throw new Error("This is String");
+	    } else {
+		throw new Error("Unsupported type");
 	    }
 	}
     }
-
 }

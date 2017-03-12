@@ -15,12 +15,20 @@ public class Method {
     public Method(Class class_, MemberInfo memberInfo) {
 	this.accessFlags = memberInfo.accessFlags();
 	this.name = memberInfo.name();
-	this.descriptor = memberInfo.descriptorIndex();
+	this.descriptor = memberInfo.descriptor();
 	this.class_ = class_;
-	
+
 	CodeAttribute ca = memberInfo.codeAttribute();
 	this.maxStack = ca.maxStack();
 	this.maxLocals = ca.maxLocals();
 	this.code = ca.code();
+    }
+
+    public String name() {
+	return name;
+    }
+
+    public String descriptor() {
+	return descriptor;
     }
 }

@@ -36,6 +36,14 @@ public class Class {
 	methods = newMethods(cf);
     }
 
+    public Class[] interfaces() {
+	return interfaces;
+    }
+
+    public Class superClass() {
+	return superClass;
+    }
+
     public boolean isPublic() {
 	return 0 != (accessFlags & AccessFlags.ACC_PUBLIC);
     }
@@ -66,6 +74,14 @@ public class Class {
 
     public boolean isEnum() {
 	return 0 != (accessFlags & AccessFlags.ACC_ENUM);
+    }
+
+    public Field[] fields() {
+	return fields;
+    }
+
+    public Method[] methods() {
+	return methods;
     }
 
     private Field[] newFields(ClassFile cf) {

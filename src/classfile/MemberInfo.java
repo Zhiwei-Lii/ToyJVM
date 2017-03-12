@@ -34,7 +34,7 @@ public class MemberInfo {
 	return cp.getUtf8(nameIndex);
     }
 
-    public String descriptorIndex() {
+    public String descriptor() {
 	return cp.getUtf8(descriptorIndex);
     }
 

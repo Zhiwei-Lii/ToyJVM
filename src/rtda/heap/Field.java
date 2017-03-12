@@ -13,9 +13,17 @@ public class Field {
     public Field(Class class_, MemberInfo memberInfo) {
 	this.accessFlags = memberInfo.accessFlags();
 	this.name = memberInfo.name();
-	this.descriptor = memberInfo.descriptorIndex();
+	this.descriptor = memberInfo.descriptor();
 	this.class_ = class_;
 	this.constantValueIndex = memberInfo.constantValueAttribute().constantValueIndex();
+    }
+
+    public String name() {
+	return name;
+    }
+
+    public String descriptor() {
+	return descriptor;
     }
 
     public boolean isStatic() {
