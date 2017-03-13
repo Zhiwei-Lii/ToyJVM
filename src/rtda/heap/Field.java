@@ -26,6 +26,10 @@ public class Field {
 	return descriptor;
     }
 
+    public int slotId() {
+	return slotId;
+    }
+
     public boolean isStatic() {
 	return 0 != (accessFlags & AccessFlags.ACC_STATIC);
     }

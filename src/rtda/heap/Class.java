@@ -1,8 +1,9 @@
 package rtda.heap;
 
 import classfile.ClassFile;
-import classfile.RawConstantPool;
 import rtda.Slot;
+import rtda.heap.ClassLoader;
+import rtda.heap.Object;
 
 /**
  * This class is the refinement of ClassFile
@@ -19,7 +20,7 @@ public class Class {
     ConstantPool constantPool;
     Field[] fields;
     Method[] methods;
-    rtda.heap.ClassLoader loader;
+    ClassLoader loader;
     Class superClass;
     Class[] interfaces;
     int instanceSlotCount;
@@ -82,6 +83,18 @@ public class Class {
 
     public Method[] methods() {
 	return methods;
+    }
+    
+    public Slot[] staticVars(){
+	return staticVars;
+    }
+
+    public ConstantPool constantPool() {
+	return constantPool;
+    }
+
+    public Object newObject() {
+	return new Object(this);
     }
 
     private Field[] newFields(ClassFile cf) {

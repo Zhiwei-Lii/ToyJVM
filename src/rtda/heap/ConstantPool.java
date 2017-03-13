@@ -52,10 +52,13 @@ public class ConstantPool {
 		consts[i] = new ConstantFieldRef(class_.loader, rcp, (ConstantFieldrefInfo)c);
 	    }
 	    else if(c instanceof ConstantMethodrefInfo){
-		consts[i] = new ConstantMehtordRef(class_.loader, rcp, (ConstantMethodrefInfo)c);
+		consts[i] = new ConstantMethodRef(class_.loader, rcp, (ConstantMethodrefInfo)c);
 	    }
 	    else if(c instanceof ConstantInterfaceMethodrefInfo){
 		consts[i] = new ConstantInterfaceMethodRef(class_.loader, rcp, (ConstantInterfaceMethodrefInfo)c);
+	    }
+	    else{
+		throw new Error("Unsupported constant");
 	    }
 	}
     }

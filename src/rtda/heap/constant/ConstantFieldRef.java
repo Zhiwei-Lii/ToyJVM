@@ -25,6 +25,14 @@ public class ConstantFieldRef implements Constant {
 	this.field = lookupField(cl);
     }
 
+    public Class class_() {
+	return cl;
+    }
+
+    public Field field() {
+	return field;
+    }
+
     private Field lookupField(Class class_) {
 	for (Field f : class_.fields()) {
 	    if (f.name().equals(fieldName) && f.descriptor().equals(descriptor)) {

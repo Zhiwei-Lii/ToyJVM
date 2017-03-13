@@ -19,4 +19,12 @@ public class Slot {
     public void setRef(Object ref) {
 	this.ref = ref;
     }
+
+    public long num() {
+	return num;
+    }
+
+    public Object ref() {
+	return ref;
+    }
 }

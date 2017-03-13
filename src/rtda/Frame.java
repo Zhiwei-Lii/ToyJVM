@@ -1,9 +1,12 @@
 package rtda;
 
+import rtda.heap.Method;
+
 public class Frame {
     LocalVars localVars;
     OperandStack operandStack;
     Thread thread;
+    Method method;
     int pc;
 
     public Frame(Thread thread, int maxLocals, int maxStack) {
@@ -23,12 +26,16 @@ public class Frame {
     public Thread thread() {
 	return thread;
     }
-    
+
     public int pc() {
 	return pc;
     }
-    
-    public void setPc(int pc){
+
+    public void setPc(int pc) {
 	this.pc = pc;
+    }
+
+    public Method method() {
+	return method;
     }
 }

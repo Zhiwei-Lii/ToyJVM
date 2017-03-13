@@ -31,4 +31,8 @@ public class Method {
     public String descriptor() {
 	return descriptor;
     }
+
+    public Class class_() {
+	return class_;
+    }
 }

@@ -9,12 +9,12 @@ public class ConstantClassRef implements Constant {
     String className;
     Class cl;
 
-    public ConstantClassRef(ClassLoader loader, RawConstantPool rcp, ConstantClassInfo cli){
+    public ConstantClassRef(ClassLoader loader, RawConstantPool rcp, ConstantClassInfo cli) {
 	this.className = rcp.getUtf8(cli.nameIndex);
 	this.cl = loader.loadClass(className);
     }
-    
-    public Class getClass_(){
+
+    public Class class_() {
 	return cl;
     }
 

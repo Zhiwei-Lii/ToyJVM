@@ -18,6 +18,6 @@ public class ClassMember {
     public ClassMember(MemberInfo memberInfo){
 	accessFlags = memberInfo.accessFlags();
 	name = memberInfo.name();
-	descriptor = memberInfo.descriptorIndex();
+	descriptor = memberInfo.descriptor();
     }
 }
