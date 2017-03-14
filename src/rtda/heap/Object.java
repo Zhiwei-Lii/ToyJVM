@@ -15,11 +15,27 @@ public class Object {
 	}
     }
 
-    public void setInt(int id, int val) {
+    public void setFieldInt(int id, int val) {
 	fields[id].setNum(val);
     }
 
-    public void setRef(int id, Object ref) {
+    public void setFieldRef(int id, Object ref) {
 	fields[id].setRef(ref);
+    }
+
+    public int getFieldInt(int id) {
+	return (int) fields[id].num();
+    }
+
+    public Object getFieldRef(int id) {
+	return fields[id].ref();
+    }
+
+    public Class class_() {
+	return cl;
+    }
+    
+    public boolean isInstanceOf(Class class_){
+	return class_.isAssignableFrom(this.cl);
     }
 }

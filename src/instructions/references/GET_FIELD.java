@@ -7,7 +7,7 @@ import rtda.heap.Field;
 import rtda.heap.constant.ConstantFieldRef;
 import rtda.heap.Object;
 
-public class PUT_FIELD extends Index16Instruction {
+public class GET_FIELD extends Index16Instruction {
 
     public void execute(Frame frame) {
 	ConstantPool cp = frame.method().class_().constantPool();
@@ -19,20 +19,19 @@ public class PUT_FIELD extends Index16Instruction {
 	int slotId = field.slotId();
 
 	if (descriptor.contains("I")) {
-	    int val = frame.operandStack().popInt();
 	    Object ref = frame.operandStack().popRef();
-	    ref.setFieldInt(slotId, val);
+	    frame.operandStack().pushInt(ref.getFieldInt(slotId));
 	} else if (descriptor.contains("L")) {
-	    Object operand = frame.operandStack().popRef();
 	    Object ref = frame.operandStack().popRef();
 
 	    if (ref == null) {
 		throw new Error("NullPointerException");
 	    }
 
-	    ref.setFieldRef(slotId, operand);
+	    frame.operandStack().pushRef(ref.getFieldRef(slotId));
 	} else {
 	    throw new Error("Unsupport");
 	}
     }
+
 }

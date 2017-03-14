@@ -84,8 +84,8 @@ public class Class {
     public Method[] methods() {
 	return methods;
     }
-    
-    public Slot[] staticVars(){
+
+    public Slot[] staticVars() {
 	return staticVars;
     }
 
@@ -95,6 +95,58 @@ public class Class {
 
     public Object newObject() {
 	return new Object(this);
+    }
+
+    /*
+     * A <- B , A is AssignableFrom B
+     */
+
+    public boolean isAssignableFrom(Class cl) {
+	if (name.equals(cl.name)) {
+	    return true;
+	}
+
+	if (!isInterface()) {
+	    return cl.isSubClassOf(this);
+	} else {
+	    return cl.isImplements(this);
+	}
+    }
+
+    private boolean isSubClassOf(Class cl) {
+	if (this.superClass.name.equals(cl.name)) {
+	    return true;
+	}
+
+	if (this.superClass != null) {
+	    return this.superClass.isSubClassOf(cl);
+	}
+
+	return false;
+    }
+
+    private boolean isImplements(Class iface) {
+	for (Class inter : this.interfaces) {
+	    if(inter.name.equals(iface.name) || inter.isSubInterfaceOf(iface)){
+		return true;
+	    }
+	}
+	
+	if(this.superClass!=null){
+	    return this.superClass.isImplements(iface);
+	}
+	
+	return false;
+    }
+
+    private boolean isSubInterfaceOf(Class iface) {
+	for (Class superInterface : this.interfaces) {
+	    if (superInterface.name.equals(iface.name) || superInterface.isSubClassOf(iface)) {
+		return true;
+	    }
+	}
+
+	return false;
     }
 
     private Field[] newFields(ClassFile cf) {
@@ -112,5 +164,4 @@ public class Class {
 	}
 	return ms;
     }
-
 }
