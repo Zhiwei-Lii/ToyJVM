@@ -39,14 +39,18 @@ public class ClassFile {
     }
 
     public String superClassName() {
-	ConstantClassInfo c = (ConstantClassInfo)constantPool.getConstantInfo(thisClass);
-	return constantPool.getUtf8(c.nameIndex);
+	if(!thisClassName().equals("java/lang/Object")){
+            ConstantClassInfo c = (ConstantClassInfo)constantPool.getConstantInfo(superClass);
+            return constantPool.getUtf8(c.nameIndex);
+	}
+	return null;
     }
 
     public String[] interfaceNames() {
 	String[] interfaceNames = new String[interfaces.length];
 	for (int i = 0; i < interfaceNames.length; i++) {
-	    interfaceNames[i] = constantPool.getUtf8(interfaces[i]);
+            ConstantClassInfo c = (ConstantClassInfo)constantPool.getConstantInfo(interfaces[i]);
+	    interfaceNames[i] = constantPool.getUtf8(c.nameIndex);
 	}
 
 	return interfaceNames;

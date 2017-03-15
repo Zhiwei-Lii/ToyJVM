@@ -1,6 +1,7 @@
 package rtda.heap.constant;
 
 import classfile.RawConstantPool;
+import classfile.constant.ConstantClassInfo;
 import classfile.constant.ConstantFieldrefInfo;
 import classfile.constant.ConstantNameAndTypeInfo;
 import rtda.heap.Field;
@@ -8,6 +9,7 @@ import rtda.heap.ClassLoader;
 import rtda.heap.Class;
 
 public class ConstantFieldRef implements Constant {
+    ClassLoader loader;
     String className;
     Class cl;
     String fieldName;
@@ -15,22 +17,24 @@ public class ConstantFieldRef implements Constant {
     Field field;
 
     public ConstantFieldRef(ClassLoader loader, RawConstantPool rcp, ConstantFieldrefInfo cfri) {
-	this.className = rcp.getUtf8(cfri.classIndex());
-	this.cl = loader.loadClass(className);
+	ConstantClassInfo cci = (ConstantClassInfo) rcp.getConstantInfo(cfri.classIndex());
+	this.className = rcp.getUtf8(cci.nameIndex);
+	this.loader = loader;
 
 	ConstantNameAndTypeInfo cnati = (ConstantNameAndTypeInfo) rcp.getConstantInfo(cfri.nameAndTypeIndex());
 	this.fieldName = rcp.getUtf8(cnati.nameIndex());
 	this.descriptor = rcp.getUtf8(cnati.descriptorIndex());
-
-	this.field = lookupField(cl);
     }
 
     public Class class_() {
+	if(cl==null){
+	    this.cl = loader.loadClass(className);
+	}
 	return cl;
     }
 
     public Field field() {
-	return field;
+	return lookupField(class_());
     }
 
     private Field lookupField(Class class_) {
@@ -54,5 +58,4 @@ public class ConstantFieldRef implements Constant {
 
 	return null;
     }
-
 }

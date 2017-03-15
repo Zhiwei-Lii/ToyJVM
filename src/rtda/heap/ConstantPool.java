@@ -28,6 +28,8 @@ public class ConstantPool {
 
     public ConstantPool(Class class_, RawConstantPool rcp) {
 	this.class_ = class_;
+	this.consts = new Constant[rcp.constantInfos().length];
+	
 	setConstants(rcp);
     }
 
@@ -58,7 +60,8 @@ public class ConstantPool {
 		consts[i] = new ConstantInterfaceMethodRef(class_.loader, rcp, (ConstantInterfaceMethodrefInfo)c);
 	    }
 	    else{
-		System.out.println("ConstantPool::setConstants unsupported constant");
+		// to do
+		//System.out.println("ConstantPool::setConstants unsupported constant");
 	    }
 	}
     }

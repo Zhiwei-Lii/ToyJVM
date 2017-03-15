@@ -17,14 +17,14 @@ public class ConstantMethodRef implements Constant {
     Method method;
 
     public ConstantMethodRef(ClassLoader loader, RawConstantPool rcp, ConstantMethodrefInfo mri) {
+	this.loader = loader;
+
 	ConstantClassInfo classInfo = (ConstantClassInfo)rcp.getConstantInfo(mri.classIndex());
 	this.className = rcp.getUtf8(classInfo.nameIndex);
 
 	ConstantNameAndTypeInfo cnati = (ConstantNameAndTypeInfo) rcp.getConstantInfo(mri.nameAndTypeIndex());
 	this.methodName = rcp.getUtf8(cnati.nameIndex());
 	this.descriptor = rcp.getUtf8(cnati.descriptorIndex());
-
-	this.loader = loader;
     }
 
     public String methodName() {

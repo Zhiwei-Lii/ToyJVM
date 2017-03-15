@@ -42,18 +42,21 @@ public class ClassLoader {
     }
 
     private void resolveInterfaces(Class cl) {
+	cl.interfaces = new Class[cl.interfaceNames.length];
 	for (int i = 0; i < cl.interfaces.length; i++) {
 	    cl.interfaces[i] = cl.loader.loadClass(cl.interfaceNames[i]);
 	}
     }
 
     private void resolveSuperClass(Class cl) {
+	System.out.println("The class is "+cl.name);
+	System.out.println("The superclass is "+cl.superClassName);
 	if (!cl.name.equals("java/lang/Object")) {
 	    cl.superClass = cl.loader.loadClass(cl.superClassName);
 	}
-	else{
+	/*else{
 	    cl.loader = this;
-	}
+	}*/
     }
 
     private void link(Class cl) {

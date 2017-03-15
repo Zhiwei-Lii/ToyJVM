@@ -36,6 +36,7 @@ public class Interpreter {
 
 	    inst.execute(frame);
 
+	    /*
 	    System.out.println();
 	    System.out.println();
 	    System.out.println("LocalVars:");
@@ -47,6 +48,7 @@ public class Interpreter {
 	    System.out.println("OperandStack:");
 	    OperandStack stack = frame.operandStack();
 	    stack.print();
+	    */
 	}
 	
     }

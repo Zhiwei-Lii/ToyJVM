@@ -9,10 +9,7 @@ public class Object {
 
     public Object(Class cl) {
 	this.cl = cl;
-
-	for (int i = 0; i < fields.length; i++) {
-	    fields[i] = new Slot();
-	}
+	this.fields = new Slot[cl.fields.length];
     }
 
     public void setFieldInt(int id, int val) {

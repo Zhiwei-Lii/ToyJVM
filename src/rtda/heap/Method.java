@@ -19,9 +19,13 @@ public class Method {
 	this.class_ = class_;
 
 	CodeAttribute ca = memberInfo.codeAttribute();
-	this.maxStack = ca.maxStack();
-	this.maxLocals = ca.maxLocals();
-	this.code = ca.code();
+
+	/* 有些method没有code属性 */
+	if (ca != null) {
+	    this.maxStack = ca.maxStack();
+	    this.maxLocals = ca.maxLocals();
+	    this.code = ca.code();
+	}
     }
 
     public String name() {

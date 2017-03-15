@@ -7,7 +7,7 @@ public class Field {
     String name;
     String descriptor;
     Class class_;
-    int constantValueIndex; // the value of the field
+    int constantValueIndex; 
     int slotId;
 
     public Field(Class class_, MemberInfo memberInfo) {
@@ -15,7 +15,11 @@ public class Field {
 	this.name = memberInfo.name();
 	this.descriptor = memberInfo.descriptor();
 	this.class_ = class_;
-	this.constantValueIndex = memberInfo.constantValueAttribute().constantValueIndex();
+	
+	/* 如果该field有初始值 */
+	if(memberInfo.constantValueAttribute()!=null){
+            this.constantValueIndex = memberInfo.constantValueAttribute().constantValueIndex();
+	}
     }
 
     public String name() {

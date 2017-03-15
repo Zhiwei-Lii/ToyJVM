@@ -7,6 +7,15 @@ import instructions.control.*;
 import instructions.loads.*;
 import instructions.stores.*;
 import instructions.math.*;
+import instructions.references.CHECK_CAST;
+import instructions.references.GET_FIELD;
+import instructions.references.GET_STATIC;
+import instructions.references.INSTANCE_OF;
+import instructions.references.INVOKE_SPECIAL;
+import instructions.references.INVOKE_VIRTUAL;
+import instructions.references.NEW;
+import instructions.references.PUT_FIELD;
+import instructions.references.PUT_STATIC;
 import instructions.stack.*;
 
 public class InstructionFactory {
@@ -36,9 +45,11 @@ public class InstructionFactory {
 	    return new BIPUSH();
 	case 0x11:
 	    return new SIPUSH();
-	// case 0x12:
+	case 0x12:
+	    return new LDC();
 	// return &LDC{}
-	// case 0x13:
+	case 0x13:
+	    return new LDC_W();
 	// return &LDC_W{}
 	// case 0x14:
 	// return &LDC2_W{}
@@ -202,26 +213,26 @@ public class InstructionFactory {
 	// return areturn
 	// case 0xb1:
 	// return _return
-	// case 0xb2:
-	// return &GET_STATIC{}
-	// case 0xb3:
-	// return &PUT_STATIC{}
-	// case 0xb4:
-	// return &GET_FIELD{}
-	// case 0xb5:
-	// return &PUT_FIELD{}
-	// case 0xb6:
-	// return &INVOKE_VIRTUAL{}
-	// case 0xb7:
-	// return &INVOKE_SPECIAL{}
+	case 0xb2:
+	    return new GET_STATIC();
+	case 0xb3:
+	    return new PUT_STATIC();
+	case 0xb4:
+	    return new GET_FIELD();
+	case 0xb5:
+	    return new PUT_FIELD();
+	case 0xb6:
+	    return new INVOKE_VIRTUAL();
+	case 0xb7:
+	    return new INVOKE_SPECIAL();
 	// case 0xb8:
 	// return &INVOKE_STATIC{}
 	// case 0xb9:
 	// return &INVOKE_INTERFACE{}
 	// case 0xba:
 	// return &INVOKE_DYNAMIC{}
-	// case 0xbb:
-	// return &NEW{}
+	case 0xbb:
+	    return new NEW();
 	// case 0xbc:
 	// return &NEW_ARRAY{}
 	// case 0xbd:
@@ -230,10 +241,10 @@ public class InstructionFactory {
 	// return arraylength
 	// case 0xbf:
 	// return athrow
-	// case 0xc0:
-	// return &CHECK_CAST{}
-	// case 0xc1:
-	// return &INSTANCE_OF{}
+	case 0xc0:
+	    return new CHECK_CAST();
+	case 0xc1:
+	    return new INSTANCE_OF();
 	// case 0xc2:
 	// return monitorenter
 	// case 0xc3:
