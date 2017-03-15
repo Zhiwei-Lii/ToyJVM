@@ -9,5 +9,4 @@ public class ILOAD extends Index8Instruction {
 	int val = frame.localVars().getInt((int) index);
 	frame.operandStack().pushInt(val);
     }
-
 }

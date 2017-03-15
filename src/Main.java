@@ -1,18 +1,18 @@
-import classfile.ClassFile;
-import classfile.Interpreter;
 import classpath.ClassPath;
+import rtda.heap.ClassLoader;
+import rtda.heap.Class;
+import rtda.heap.Method;
 
 public class Main {
 
     public static void startJVM(Cmd cmd) {
 	ClassPath cp = new ClassPath(cmd.xJreOption, cmd.cpOption);
+	ClassLoader loader = new ClassLoader(cp);
 	
 	String className = cmd.class_.replaceAll("\\.", "/");
-	byte[] result = cp.readClass(className);
-	
-	ClassFile classFile = new ClassFile(result);
-	Interpreter.interpret(classFile.methods[1]);
-
+	Class mainClass = loader.loadClass(className);
+	Method mainMethod = mainClass.getMainMethod();
+	Interpreter.interpret(mainMethod);
     }
 
     public static void main(String[] args) {
@@ -22,4 +22,5 @@ public class Main {
 	startJVM(cmd);
     }
 }
+
 

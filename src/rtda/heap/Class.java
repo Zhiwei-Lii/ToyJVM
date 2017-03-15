@@ -27,14 +27,15 @@ public class Class {
     int staticSlotCount;
     Slot[] staticVars;
 
-    public Class(ClassFile cf) {
-	accessFlags = cf.accessFlags();
-	name = cf.thisClassName();
-	superClassName = cf.superClassName();
-	interfaceNames = cf.interfaceNames();
-	constantPool = new ConstantPool(this, cf.rawConstantPool());
-	fields = newFields(cf);
-	methods = newMethods(cf);
+    public Class(ClassLoader loader, ClassFile cf) {
+	this.accessFlags = cf.accessFlags();
+	this.name = cf.thisClassName();
+	this.loader = loader;
+	this.superClassName = cf.superClassName();
+	this.interfaceNames = cf.interfaceNames();
+	this.constantPool = new ConstantPool(this, cf.rawConstantPool());
+	this.fields = newFields(cf);
+	this.methods = newMethods(cf);
     }
 
     public Class[] interfaces() {
@@ -147,6 +148,21 @@ public class Class {
 	}
 
 	return false;
+    }
+    
+    public Method getMainMethod(){
+	return getStaticMethod("main", "([Ljava/lang/String;)V");
+    }
+    
+    
+    private Method getStaticMethod(String name, String descriptor){
+	for(Method m: methods){
+	    if(m.descriptor.equals(descriptor)&&m.name.equals(name)&&m.isStatic()){
+		return m;
+	    }
+	}
+	
+	return null;
     }
 
     private Field[] newFields(ClassFile cf) {

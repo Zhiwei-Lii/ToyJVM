@@ -9,10 +9,11 @@ public class Frame {
     Method method;
     int pc;
 
-    public Frame(Thread thread, int maxLocals, int maxStack) {
+    public Frame(Thread thread, Method method) {
 	this.thread = thread;
-	this.localVars = new LocalVars(maxLocals);
-	this.operandStack = new OperandStack(maxStack);
+	this.method = method;
+	this.localVars = new LocalVars(method.maxLocals());
+	this.operandStack = new OperandStack(method.maxStack());
     }
 
     public LocalVars localVars() {

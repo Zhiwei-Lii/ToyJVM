@@ -24,47 +24,36 @@ public class ConstantFactory {
 
 	switch (tag) {
 	case CONSTANT_Class: {
-	    System.out.println("Constant:class");
 	    return new ConstantClassInfo(reader);
 	}
 	case CONSTANT_Fieldref: {
-	    System.out.println("Constant:fieldref");
 	    return new ConstantFieldrefInfo(reader);
 	}
 	case CONSTANT_Methodref: {
-	    System.out.println("Constant:methodref");
 	    return new ConstantMethodrefInfo(reader);
 	}
 	case CONSTANT_InterfaceMethodref: {
-	    System.out.println("Constant:interface");
 	    return new ConstantInterfaceMethodrefInfo(reader);
 	}
 	case CONSTANT_String: {
-	    System.out.println("Constant:string");
 	    return new ConstantStringInfo(reader);
 	}
 	case CONSTANT_Integer: {
-	    System.out.println("Constant:integer");
 	    return new ConstantIntegerInfo(reader);
 	}
 	case CONSTANT_Float: {
-	    System.out.println("Constant:float");
 	    return new ConstantFloatInfo(reader);
 	}
 	case CONSTANT_Long: {
-	    System.out.println("Constant:long");
 	    return new ConstantLongInfo(reader);
 	}
 	case CONSTANT_Double: {
-	    System.out.println("Constant:double");
 	    return new ConstantDoubleInfo(reader);
 	}
 	case CONSTANT_NameAndType: {
-	    System.out.println("Constant:nameAndType");
 	    return new ConstantNameAndTypeInfo(reader);
 	}
 	case CONSTANT_Utf8: {
-	    System.out.println("Constant:utf-8");
 	    return new ConstantUtf8Info(reader);
 	}
 	default: {

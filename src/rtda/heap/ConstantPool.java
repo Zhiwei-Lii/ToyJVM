@@ -58,7 +58,7 @@ public class ConstantPool {
 		consts[i] = new ConstantInterfaceMethodRef(class_.loader, rcp, (ConstantInterfaceMethodrefInfo)c);
 	    }
 	    else{
-		throw new Error("Unsupported constant");
+		System.out.println("ConstantPool::setConstants unsupported constant");
 	    }
 	}
     }

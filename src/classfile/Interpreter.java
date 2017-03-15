@@ -1,5 +1,6 @@
 package classfile;
 import rtda.Thread;
+import rtda.heap.Method;
 import classfile.attribute.CodeAttribute;
 import instructions.base.BytecodeReader;
 import instructions.base.Instruction;
@@ -10,21 +11,12 @@ import rtda.OperandStack;
 import rtda.Slot;
 
 public class Interpreter {
-    public static void interpret(MemberInfo methodInfo){
-	CodeAttribute codeAttr = methodInfo.codeAttribute();
-	int maxLocals = (int) codeAttr.maxLocals;
-	int maxStack = (int)codeAttr.maxStack;
-	
-	byte[] code = new byte[methodInfo.codeAttribute().code.length];
-	for(int i=0; i<code.length; i++){
-	    code[i] = (byte)methodInfo.codeAttribute().code[i];
-	}
-	
+    public static void interpret(Method method){
 	Thread thread = new Thread();
-	Frame frame = new Frame(thread, maxLocals, maxStack);
+	Frame frame = new Frame(thread, method);
 	thread.pushFrame(frame);
 	
-	loop(thread, code);
+	loop(thread, method.code());
 	
     }
     

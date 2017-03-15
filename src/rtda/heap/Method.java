@@ -35,4 +35,20 @@ public class Method {
     public Class class_() {
 	return class_;
     }
+
+    public int maxStack() {
+	return maxStack;
+    }
+
+    public int maxLocals() {
+	return maxLocals;
+    }
+
+    public byte[] code() {
+	return code;
+    }
+
+    public boolean isStatic() {
+	return 0 != (accessFlags & AccessFlags.ACC_STATIC);
+    }
 }

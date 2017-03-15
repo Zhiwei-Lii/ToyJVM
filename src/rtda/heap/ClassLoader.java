@@ -27,14 +27,14 @@ public class ClassLoader {
     private Class loadNonArrayClass(String name) {
 	byte[] data = classPath.readClass(name);
 	Class cl = defineClass(data);
+
 	link(cl);
 	return cl;
     }
 
     private Class defineClass(byte[] data) {
 	ClassFile cf = new ClassFile(data);
-	Class cl = new Class(cf);
-	cl.loader = this;
+	Class cl = new Class(this, cf);
 	resolveSuperClass(cl);
 	resolveInterfaces(cl);
 	classMap.put(cl.name, cl);
@@ -50,6 +50,9 @@ public class ClassLoader {
     private void resolveSuperClass(Class cl) {
 	if (!cl.name.equals("java/lang/Object")) {
 	    cl.superClass = cl.loader.loadClass(cl.superClassName);
+	}
+	else{
+	    cl.loader = this;
 	}
     }
 

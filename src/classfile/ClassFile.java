@@ -2,6 +2,7 @@ package classfile;
 
 import classfile.attribute.AttributeFactory;
 import classfile.attribute.AttributeInfo;
+import classfile.constant.ConstantClassInfo;
 
 /**
  * This class is the model of JVM Class Specification
@@ -33,11 +34,13 @@ public class ClassFile {
     }
 
     public String thisClassName() {
-	return constantPool.getUtf8(thisClass);
+	ConstantClassInfo c = (ConstantClassInfo)constantPool.getConstantInfo(thisClass);
+	return constantPool.getUtf8(c.nameIndex);
     }
 
     public String superClassName() {
-	return constantPool.getUtf8(superClass);
+	ConstantClassInfo c = (ConstantClassInfo)constantPool.getConstantInfo(thisClass);
+	return constantPool.getUtf8(c.nameIndex);
     }
 
     public String[] interfaceNames() {
