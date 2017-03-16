@@ -16,15 +16,15 @@ public class INVOKE_VIRTUAL extends Index16Instruction {
 	    OperandStack stack = frame.operandStack();
 
 	    if (methodRef.descriptor().equals("(Z)V")) {
-		System.out.printf("%v\n", stack.popInt() != 0);
+		System.out.println(stack.popInt() != 0);
 	    } else if (methodRef.descriptor().equals("(C)V")) {
-		System.out.printf("%c\n", stack.popInt());
+		System.out.println(stack.popInt());
 	    } else if (methodRef.descriptor().equals("(B)V")) {
-		System.out.printf("%v\n", stack.popInt());
+		System.out.println(stack.popInt());
 	    } else if (methodRef.descriptor().equals("(S)V")) {
-		System.out.printf("%v\n", stack.popInt());
+		System.out.println(stack.popInt());
 	    } else if (methodRef.descriptor().equals("(I)V")) {
-		System.out.printf("%v\n", stack.popInt());
+		System.out.println(stack.popInt());
 	    } else {
 		System.out.println("Unsupported printf");
 	    }

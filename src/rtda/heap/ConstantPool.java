@@ -29,7 +29,7 @@ public class ConstantPool {
     public ConstantPool(Class class_, RawConstantPool rcp) {
 	this.class_ = class_;
 	this.consts = new Constant[rcp.constantInfos().length];
-	
+
 	setConstants(rcp);
     }
 
@@ -37,31 +37,26 @@ public class ConstantPool {
 	return consts[index];
     }
 
-    private void setConstants(RawConstantPool rcp){
-	for(int i=0; i<rcp.constantInfos().length; i++){
+    private void setConstants(RawConstantPool rcp) {
+	for (int i = 0; i < rcp.constantInfos().length; i++) {
 	    ConstantInfo c = rcp.constantInfos()[i];
 
-	    if(c instanceof ConstantIntegerInfo){
-		consts[i] = new ConstantInteger((ConstantIntegerInfo)c);
-	    }
-	    else if(c instanceof ConstantStringInfo){
-		consts[i] = new ConstantString(rcp, (ConstantStringInfo)c);
-	    }
-	    else if(c instanceof ConstantClassInfo){
-		consts[i] = new ConstantClassRef(class_.loader, rcp, (ConstantClassInfo)c);
-	    }
-	    else if(c instanceof ConstantFieldrefInfo){
-		consts[i] = new ConstantFieldRef(class_.loader, rcp, (ConstantFieldrefInfo)c);
-	    }
-	    else if(c instanceof ConstantMethodrefInfo){
-		consts[i] = new ConstantMethodRef(class_.loader, rcp, (ConstantMethodrefInfo)c);
-	    }
-	    else if(c instanceof ConstantInterfaceMethodrefInfo){
-		consts[i] = new ConstantInterfaceMethodRef(class_.loader, rcp, (ConstantInterfaceMethodrefInfo)c);
-	    }
-	    else{
+	    if (c instanceof ConstantIntegerInfo) {
+		consts[i] = new ConstantInteger((ConstantIntegerInfo) c);
+	    } else if (c instanceof ConstantStringInfo) {
+		consts[i] = new ConstantString(rcp, (ConstantStringInfo) c);
+	    } else if (c instanceof ConstantClassInfo) {
+		consts[i] = new ConstantClassRef(class_.loader, rcp, (ConstantClassInfo) c);
+	    } else if (c instanceof ConstantFieldrefInfo) {
+		consts[i] = new ConstantFieldRef(class_.loader, rcp, (ConstantFieldrefInfo) c);
+	    } else if (c instanceof ConstantMethodrefInfo) {
+		consts[i] = new ConstantMethodRef(class_.loader, rcp, (ConstantMethodrefInfo) c);
+	    } else if (c instanceof ConstantInterfaceMethodrefInfo) {
+		consts[i] = new ConstantInterfaceMethodRef(class_.loader, rcp, (ConstantInterfaceMethodrefInfo) c);
+	    } else {
 		// to do
-		//System.out.println("ConstantPool::setConstants unsupported constant");
+		// System.out.println("ConstantPool::setConstants unsupported
+		// constant");
 	    }
 	}
     }

@@ -2,6 +2,7 @@ package instructions.references;
 
 import instructions.base.Index16Instruction;
 import rtda.Frame;
+import rtda.OperandStack;
 import rtda.heap.Class;
 import rtda.heap.ConstantPool;
 import rtda.heap.Field;
@@ -19,10 +20,12 @@ public class GET_STATIC extends Index16Instruction {
 	String descriptor = field.descriptor();
 	int slotId = field.slotId();
 
+	OperandStack stack = frame.operandStack();
+	
 	if (descriptor.contains("I")) {
-	    frame.operandStack().pushInt((int) cl.staticVars()[slotId].num());
+	    stack.pushInt((int) cl.staticVars()[slotId].num());
 	} else if (descriptor.contains("L")) {
-	    frame.operandStack().pushRef(cl.staticVars()[slotId].ref());
+	    stack.pushRef(cl.staticVars()[slotId].ref());
 	} else {
 	    throw new Error("Unsupport");
 	}

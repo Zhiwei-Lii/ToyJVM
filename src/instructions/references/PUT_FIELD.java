@@ -2,6 +2,7 @@ package instructions.references;
 
 import instructions.base.Index16Instruction;
 import rtda.Frame;
+import rtda.OperandStack;
 import rtda.heap.ConstantPool;
 import rtda.heap.Field;
 import rtda.heap.constant.ConstantFieldRef;
@@ -18,13 +19,15 @@ public class PUT_FIELD extends Index16Instruction {
 	String descriptor = field.descriptor();
 	int slotId = field.slotId();
 
+	OperandStack stack = frame.operandStack();
+
 	if (descriptor.contains("I")) {
 	    int val = frame.operandStack().popInt();
-	    Object ref = frame.operandStack().popRef();
+	    Object ref = stack.popRef();
 	    ref.setFieldInt(slotId, val);
 	} else if (descriptor.contains("L")) {
-	    Object operand = frame.operandStack().popRef();
-	    Object ref = frame.operandStack().popRef();
+	    Object operand = stack.popRef();
+	    Object ref = stack.popRef();
 
 	    if (ref == null) {
 		throw new Error("NullPointerException");

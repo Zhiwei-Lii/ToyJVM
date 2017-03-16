@@ -2,6 +2,7 @@ package rtda.heap.constant;
 
 import rtda.heap.Method;
 import classfile.RawConstantPool;
+import classfile.constant.ConstantClassInfo;
 import classfile.constant.ConstantInterfaceMethodrefInfo;
 import classfile.constant.ConstantNameAndTypeInfo;
 import rtda.heap.ClassLoader;
@@ -17,7 +18,9 @@ public class ConstantInterfaceMethodRef implements Constant {
     
     public ConstantInterfaceMethodRef(ClassLoader loader, RawConstantPool rcp, ConstantInterfaceMethodrefInfo fimri){
 	this.loader = loader;
-	this.className = rcp.getUtf8(fimri.classIndex());
+	
+	ConstantClassInfo cci = (ConstantClassInfo) rcp.getConstantInfo(fimri.classIndex());
+	this.className = rcp.getUtf8(cci.nameIndex);
 
 	ConstantNameAndTypeInfo cnati = (ConstantNameAndTypeInfo) rcp.getConstantInfo(fimri.nameAndTypeIndex());
 	this.methodName = rcp.getUtf8(cnati.nameIndex());

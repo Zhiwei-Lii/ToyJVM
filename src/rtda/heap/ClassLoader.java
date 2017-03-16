@@ -49,14 +49,14 @@ public class ClassLoader {
     }
 
     private void resolveSuperClass(Class cl) {
-	System.out.println("The class is "+cl.name);
-	System.out.println("The superclass is "+cl.superClassName);
+	System.out.println("The class is " + cl.name);
+	System.out.println("The superclass is " + cl.superClassName);
 	if (!cl.name.equals("java/lang/Object")) {
 	    cl.superClass = cl.loader.loadClass(cl.superClassName);
 	}
-	/*else{
-	    cl.loader = this;
-	}*/
+	/*
+	 * else{ cl.loader = this; }
+	 */
     }
 
     private void link(Class cl) {
@@ -103,8 +103,11 @@ public class ClassLoader {
 
     private void allocAndInitStaticVars(Class cl) {
 	cl.staticVars = new Slot[cl.staticSlotCount];
-	for (Field f : cl.fields) {
+	for (int i = 0; i < cl.staticVars.length; i++) {
+	    cl.staticVars[i] = new Slot();
+	}
 
+	for (Field f : cl.fields) {
 	    if (f.isStatic() && f.isFinal()) {
 		initStaticFinalVar(cl, f);
 	    }
@@ -112,6 +115,7 @@ public class ClassLoader {
     }
 
     private void initStaticFinalVar(Class cl, Field f) {
+
 	Slot[] vars = cl.staticVars;
 	ConstantPool cp = cl.constantPool;
 	int cpIndex = f.constantValueIndex;

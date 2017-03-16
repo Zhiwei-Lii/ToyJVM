@@ -36,6 +36,10 @@ public class Class {
 	this.constantPool = new ConstantPool(this, cf.rawConstantPool());
 	this.fields = newFields(cf);
 	this.methods = newMethods(cf);
+	
+	/* staticVars和fields等的初始化在ClassLoader中 
+	 * fields是包括static在内的所有field
+	 * */
     }
 
     public Class[] interfaces() {

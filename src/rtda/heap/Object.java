@@ -9,7 +9,11 @@ public class Object {
 
     public Object(Class cl) {
 	this.cl = cl;
+
 	this.fields = new Slot[cl.fields.length];
+	for (int i = 0; i < fields.length; i++) {
+	    fields[i] = new Slot();
+	}
     }
 
     public void setFieldInt(int id, int val) {
@@ -31,8 +35,8 @@ public class Object {
     public Class class_() {
 	return cl;
     }
-    
-    public boolean isInstanceOf(Class class_){
+
+    public boolean isInstanceOf(Class class_) {
 	return class_.isAssignableFrom(this.cl);
     }
 }
