@@ -10,6 +10,7 @@ public class Method {
     Class class_;
     int maxStack;
     int maxLocals;
+    int argSlotCount;
     byte[] code;
 
     public Method(Class class_, MemberInfo memberInfo) {
@@ -25,6 +26,7 @@ public class Method {
 	    this.maxStack = ca.maxStack();
 	    this.maxLocals = ca.maxLocals();
 	    this.code = ca.code();
+	    this.argSlotCount = calcArgSlotCount();
 	}
     }
 
@@ -38,6 +40,10 @@ public class Method {
 
     public Class class_() {
 	return class_;
+    }
+
+    public int argSlotCount() {
+	return argSlotCount;
     }
 
     public int maxStack() {
@@ -54,5 +60,10 @@ public class Method {
 
     public boolean isStatic() {
 	return 0 != (accessFlags & AccessFlags.ACC_STATIC);
+    }
+
+    /* 解析descriptor来获取参数和返回值的信息 */
+    private int calcArgSlotCount() {
+	// to do
     }
 }

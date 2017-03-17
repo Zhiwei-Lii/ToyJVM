@@ -16,8 +16,6 @@ public class INVOKE_VIRTUAL extends Index16Instruction {
 	    OperandStack stack = frame.operandStack();
 
 	    if (methodRef.descriptor().equals("(Z)V")) {
-		System.out.println(stack.popInt() != 0);
-	    } else if (methodRef.descriptor().equals("(C)V")) {
 		System.out.println(stack.popInt());
 	    } else if (methodRef.descriptor().equals("(B)V")) {
 		System.out.println(stack.popInt());
