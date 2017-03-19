@@ -27,30 +27,16 @@ public class LocalVars {
     public Object getRef(int index) {
 	return localVars[index].ref;
     }
+
+    public void setSlot(int index, Slot slot) {
+	localVars[index] = slot;
+    }
+
+    public Slot getSlot(int index) {
+	return localVars[index];
+    }
     
     public Slot[] localVars(){
 	return localVars;
     }
-
-    /*
-     * public void setFloat(int index, float val){ // to do }
-     * 
-     * public float getFloat(int index){ //to do }
-     * 
-     * public void setDouble(int index, double val){
-     * 
-     * }
-     * 
-     * public double getDouble(int index){
-     * 
-     * }
-     * 
-     * public void setLong(int index, long val){
-     * 
-     * }
-     * 
-     * public long getLong(int index){
-     * 
-     * }
-     */
 }

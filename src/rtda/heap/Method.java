@@ -64,6 +64,16 @@ public class Method {
 
     /* 解析descriptor来获取参数和返回值的信息 */
     private int calcArgSlotCount() {
-	// to do
+	int count = 0;
+	MethodDescriptor des = new MethodDescriptor(descriptor);
+	for (String param : des.parameterTypes) {
+	    count++;
+	}
+
+	if (!isStatic()) {
+	    count++;
+	}
+	
+	return count;
     }
 }

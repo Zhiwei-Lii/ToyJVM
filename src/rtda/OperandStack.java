@@ -50,31 +50,4 @@ public class OperandStack {
 	top--;
 	return slots[top];
     }
-    
-    /*
-    public void pushFloat(float val){
-    
-    }
-    
-    public float popFloat(){
-	
-    }
-    
-    public void pushDouble(double val){
-	
-    }
-    
-    public double popDouble(){
-	
-    }
-    
-    public void pushLong(long val){
-	
-    }
-    
-    public long popLong(){
-	
-    }
-    */
-
 }
