@@ -34,8 +34,10 @@ public class MethodDescriptor {
     }
 
     private void parseParamTypes() {
-	while (pointer < raw.length()) {
-	    parameterTypes.add(parseFieldType());
+	String type = parseFieldType();
+	while (!type.equals("")) {
+	    parameterTypes.add(type);
+	    type = parseFieldType();
 	}
     }
 
@@ -71,12 +73,29 @@ public class MethodDescriptor {
 
     private String parseFieldType() {
 	switch (read()) {
+	case 'B':
+	    return "B";
+	case 'C':
+	    return "C";
+	case 'D':
+	    return "D";
+	case 'F':
+	    return "F";
 	case 'I':
 	    return "I";
+	case 'Z':
+	    return "Z";
+	case 'S':
+	    return "S";
+	case 'J':
+	    return "J";
 	case 'L':
 	    return parseObjectType();
 	case '[':
 	    return parseArrayType();
+	case ')':
+	    unread();
+	    return "";
 	default:
 	    throw new Error("Unsupported descriptor type");
 	}

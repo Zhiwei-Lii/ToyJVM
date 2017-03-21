@@ -35,6 +35,14 @@ public class ConstantInterfaceMethodRef implements Constant {
 	return this.method;
     }
 
+    public String methodName() {
+	return methodName;
+    }
+
+    public String descriptor() {
+	return descriptor;
+    }
+
     private void resolveInterfaceMethodRef() {
 	Class cl = this.loader.loadClass(className);
 

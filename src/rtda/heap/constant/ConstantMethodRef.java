@@ -35,6 +35,13 @@ public class ConstantMethodRef implements Constant {
 	return descriptor;
     }
 
+    public Class class_() {
+	if (cl == null) {
+	    cl = loader.loadClass(className);
+	}
+	return cl;
+    }
+
     /* 对应cp_methodref.go里的ResolvedMethod() */
     public Method method() {
 	if (method == null) {
@@ -44,7 +51,7 @@ public class ConstantMethodRef implements Constant {
     }
 
     private void resolveMethodRef() {
-	Class cl = loader.loadClass(className);
+	cl = loader.loadClass(className);
 
 	if (cl.isInterface()) {
 	    throw new Error("java.lang.IncompatibleClassChangeError");

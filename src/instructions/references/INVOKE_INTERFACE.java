@@ -1,23 +1,32 @@
 package instructions.references;
 
+import instructions.base.BytecodeReader;
 import instructions.base.Index16Instruction;
+import instructions.base.Instruction;
 import rtda.Frame;
 import rtda.heap.Class;
 import rtda.heap.ConstantPool;
+import rtda.heap.constant.ConstantInterfaceMethodRef;
 import rtda.heap.constant.ConstantMethodRef;
 import rtda.heap.Method;
 import rtda.heap.Object;
 import rtda.Thread;
 import rtda.Slot;
 
-public class INVOKE_SPECIAL extends Index16Instruction {
+public class INVOKE_INTERFACE implements Instruction {
+    long index;
+
+    public void fetchOperands(BytecodeReader reader) {
+	index = reader.readU2();
+	reader.readU1(); 
+	reader.readU1(); 
+    }
 
     public void execute(Frame frame) {
 	Class currentClass = frame.method().class_();
 	ConstantPool cp = currentClass.constantPool();
-	ConstantMethodRef methodRef = (ConstantMethodRef) cp.getConstant((int) index);
+	ConstantInterfaceMethodRef methodRef = (ConstantInterfaceMethodRef) cp.getConstant((int) index);
 
-	Class resolvedClass = methodRef.class_();
 	Method resolvedMethod = methodRef.method();
 
 	Object ref = frame.operandStack().getRefFromTop(resolvedMethod.argSlotCount() - 1);
@@ -26,12 +35,10 @@ public class INVOKE_SPECIAL extends Index16Instruction {
 	    throw new Error("java.lang.NullPointerException");
 	}
 
-	Method methodToBeInvoked = resolvedMethod;
+	Method methodToBeInvoked = ref.class_().lookupMethodInClass(methodRef.methodName(), methodRef.descriptor());
 
-	if (currentClass.isSuper() && resolvedClass.isSuperClassOf(currentClass)
-		&& !resolvedMethod.name().equals("<init>")) {
-	    Class superClass = currentClass.superClass();
-	    methodToBeInvoked = superClass.lookupMethodInClass(methodRef.methodName(), methodRef.descriptor());
+	if (methodToBeInvoked == null) {
+	    throw new Error("java.lang.AbstractMethodError");
 	}
 
 	invokeMethod(frame, methodToBeInvoked);

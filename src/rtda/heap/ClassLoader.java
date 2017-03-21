@@ -49,14 +49,9 @@ public class ClassLoader {
     }
 
     private void resolveSuperClass(Class cl) {
-	System.out.println("The class is " + cl.name);
-	System.out.println("The superclass is " + cl.superClassName);
 	if (!cl.name.equals("java/lang/Object")) {
 	    cl.superClass = cl.loader.loadClass(cl.superClassName);
 	}
-	/*
-	 * else{ cl.loader = this; }
-	 */
     }
 
     private void link(Class cl) {

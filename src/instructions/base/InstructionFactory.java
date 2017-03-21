@@ -11,7 +11,9 @@ import instructions.references.CHECK_CAST;
 import instructions.references.GET_FIELD;
 import instructions.references.GET_STATIC;
 import instructions.references.INSTANCE_OF;
+import instructions.references.INVOKE_INTERFACE;
 import instructions.references.INVOKE_SPECIAL;
+import instructions.references.INVOKE_STATIC;
 import instructions.references.INVOKE_VIRTUAL;
 import instructions.references.NEW;
 import instructions.references.PUT_FIELD;
@@ -22,6 +24,7 @@ public class InstructionFactory {
 
     public static Instruction newInstruction(long opcode) {
 	System.out.printf("The opcode is %x", opcode);
+	System.out.println("");
 	switch ((int) opcode) {
 	case 0x00:
 	    return new NOP();
@@ -201,18 +204,18 @@ public class InstructionFactory {
 	    return new TABLE_SWITCH();
 	case 0xab:
 	    return new LOOKUP_SWITCH();
-	// case 0xac:
-	// return ireturn
-	// case 0xad:
-	// return lreturn
+	case 0xac:
+	    return new IRETURN();
+	case 0xad:
+	    return new LRETURN();
 	// case 0xae:
 	// return freturn
 	// case 0xaf:
 	// return dreturn
 	// case 0xb0:
 	// return areturn
-	// case 0xb1:
-	// return _return
+	case 0xb1:
+	    return new RETURN();
 	case 0xb2:
 	    return new GET_STATIC();
 	case 0xb3:
@@ -225,10 +228,10 @@ public class InstructionFactory {
 	    return new INVOKE_VIRTUAL();
 	case 0xb7:
 	    return new INVOKE_SPECIAL();
-	// case 0xb8:
-	// return &INVOKE_STATIC{}
-	// case 0xb9:
-	// return &INVOKE_INTERFACE{}
+	case 0xb8:
+	    return new INVOKE_STATIC();
+	case 0xb9:
+	    return new INVOKE_INTERFACE();
 	// case 0xba:
 	// return &INVOKE_DYNAMIC{}
 	case 0xbb:

@@ -21,13 +21,13 @@ public class Method {
 
 	CodeAttribute ca = memberInfo.codeAttribute();
 
-	/* 有些method没有code属性 */
+	/* abstract method没有code属性 */
 	if (ca != null) {
 	    this.maxStack = ca.maxStack();
 	    this.maxLocals = ca.maxLocals();
 	    this.code = ca.code();
-	    this.argSlotCount = calcArgSlotCount();
 	}
+        this.argSlotCount = calcArgSlotCount();
     }
 
     public String name() {

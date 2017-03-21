@@ -36,10 +36,10 @@ public class Class {
 	this.constantPool = new ConstantPool(this, cf.rawConstantPool());
 	this.fields = newFields(cf);
 	this.methods = newMethods(cf);
-	
-	/* staticVars和fields等的初始化在ClassLoader中 
-	 * fields是包括static在内的所有field
-	 * */
+
+	/*
+	 * staticVars和fields等的初始化在ClassLoader中 fields是包括static在内的所有field
+	 */
     }
 
     public Class[] interfaces() {
@@ -82,6 +82,10 @@ public class Class {
 	return 0 != (accessFlags & AccessFlags.ACC_ENUM);
     }
 
+    public String name() {
+	return name;
+    }
+
     public Field[] fields() {
 	return fields;
     }
@@ -118,7 +122,15 @@ public class Class {
 	}
     }
 
+    public boolean isSuperClassOf(Class other) {
+	return other.isSubClassOf(this);
+    }
+
     private boolean isSubClassOf(Class cl) {
+	if (this.superClass == null) {
+	    return false;
+	}
+
 	if (this.superClass.name.equals(cl.name)) {
 	    return true;
 	}
@@ -132,15 +144,15 @@ public class Class {
 
     private boolean isImplements(Class iface) {
 	for (Class inter : this.interfaces) {
-	    if(inter.name.equals(iface.name) || inter.isSubInterfaceOf(iface)){
+	    if (inter.name.equals(iface.name) || inter.isSubInterfaceOf(iface)) {
 		return true;
 	    }
 	}
-	
-	if(this.superClass!=null){
+
+	if (this.superClass != null) {
 	    return this.superClass.isImplements(iface);
 	}
-	
+
 	return false;
     }
 
@@ -153,19 +165,32 @@ public class Class {
 
 	return false;
     }
-    
-    public Method getMainMethod(){
+
+    public Method getMainMethod() {
 	return getStaticMethod("main", "([Ljava/lang/String;)V");
     }
-    
-    
-    private Method getStaticMethod(String name, String descriptor){
-	for(Method m: methods){
-	    if(m.descriptor.equals(descriptor)&&m.name.equals(name)&&m.isStatic()){
+
+    public Method lookupMethodInClass(String methodName, String descriptor) {
+	for (Method m : methods()) {
+	    if (m.name().equals(methodName) && m.descriptor().equals(descriptor)) {
 		return m;
 	    }
 	}
-	
+
+	if (superClass != null) {
+	    return superClass.lookupMethodInClass(methodName, descriptor);
+	}
+
+	return null;
+    }
+
+    private Method getStaticMethod(String name, String descriptor) {
+	for (Method m : methods) {
+	    if (m.descriptor.equals(descriptor) && m.name.equals(name) && m.isStatic()) {
+		return m;
+	    }
+	}
+
 	return null;
     }
 
@@ -184,4 +209,5 @@ public class Class {
 	}
 	return ms;
     }
+
 }
