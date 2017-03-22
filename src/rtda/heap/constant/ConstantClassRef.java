@@ -16,8 +16,8 @@ public class ConstantClassRef implements Constant {
     }
 
     public Class class_() {
-	if(cl==null){
-            this.cl = loader.loadClass(className);
+	if (cl == null) {
+	    this.cl = loader.loadClass(className);
 	}
 	return cl;
     }

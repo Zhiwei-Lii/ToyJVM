@@ -17,6 +17,12 @@ public class GET_STATIC extends Index16Instruction {
 	Field field = fieldRef.field();
 	Class cl = fieldRef.class_();
 
+	if (!cl.initStarted()) {
+	    frame.unrollPc();
+	    initClass(frame.thread(), cl);
+	    return;
+	}
+
 	String descriptor = field.descriptor();
 	int slotId = field.slotId();
 

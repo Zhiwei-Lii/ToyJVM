@@ -27,7 +27,7 @@ public class ConstantFieldRef implements Constant {
     }
 
     public Class class_() {
-	if(cl==null){
+	if (cl == null) {
 	    this.cl = loader.loadClass(className);
 	}
 	return cl;

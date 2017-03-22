@@ -2,7 +2,6 @@ package instructions.references;
 
 import instructions.base.Index16Instruction;
 import rtda.Frame;
-import rtda.OperandStack;
 import rtda.heap.Class;
 import rtda.heap.ConstantPool;
 import rtda.heap.constant.ConstantMethodRef;

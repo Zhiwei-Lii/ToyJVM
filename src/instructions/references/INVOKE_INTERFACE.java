@@ -1,13 +1,11 @@
 package instructions.references;
 
 import instructions.base.BytecodeReader;
-import instructions.base.Index16Instruction;
 import instructions.base.Instruction;
 import rtda.Frame;
 import rtda.heap.Class;
 import rtda.heap.ConstantPool;
 import rtda.heap.constant.ConstantInterfaceMethodRef;
-import rtda.heap.constant.ConstantMethodRef;
 import rtda.heap.Method;
 import rtda.heap.Object;
 import rtda.Thread;
@@ -18,8 +16,8 @@ public class INVOKE_INTERFACE implements Instruction {
 
     public void fetchOperands(BytecodeReader reader) {
 	index = reader.readU2();
-	reader.readU1(); 
-	reader.readU1(); 
+	reader.readU1();
+	reader.readU1();
     }
 
     public void execute(Frame frame) {
@@ -56,6 +54,15 @@ public class INVOKE_INTERFACE implements Instruction {
 		Slot slot = invokerFrame.operandStack().popSlot();
 		newFrame.localVars().setSlot(i, slot);
 	    }
+	}
+	
+	if(method.isNative()){
+            if(method.name().equals("registerNatives")){
+                thread.popFrame();
+            }
+            else{
+                throw new Error("Unsupported")
+            }
 	}
     }
 

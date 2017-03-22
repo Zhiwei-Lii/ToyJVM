@@ -10,7 +10,7 @@ public class WildcardEntry implements Entry {
 	String baseDir = path.substring(0, path.length() - 1); // remove *
 	File folder = new File(baseDir);
 	File[] files = folder.listFiles();
-	
+
 	for (File file : files) {
 	    if (file.getName().endsWith(".jar") || file.getName().endsWith(".JAR")) {
 		String filePath = baseDir + file.getName();

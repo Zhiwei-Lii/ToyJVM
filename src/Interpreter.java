@@ -12,18 +12,18 @@ import rtda.Slot;
 
 public class Interpreter {
 
-    public static void interpret(Method method){
+    public static void interpret(Method method) {
 	Thread thread = new Thread();
 	Frame frame = new Frame(thread, method);
 	thread.pushFrame(frame);
-	
+
 	loop(thread);
     }
-    
-    private static void loop(Thread thread){
+
+    private static void loop(Thread thread) {
 	BytecodeReader reader = new BytecodeReader(thread.topFrame().method().code());
-	
-	while(true){
+
+	while (true) {
 	    Frame frame = thread.topFrame();
 	    int pc = frame.pc();
 	    thread.setPc(pc);
@@ -34,27 +34,22 @@ public class Interpreter {
 	    Instruction inst = InstructionFactory.newInstruction(opcode);
 	    inst.fetchOperands(reader);
 	    frame.setPc(reader.pc());
-	    
+
 	    // execute
 	    inst.execute(frame);
-	    
-	    if(thread.isStackEmpty()){
+
+	    if (thread.isStackEmpty()) {
 		break;
 	    }
 
 	    /*
-	    System.out.println();
-	    System.out.println();
-	    System.out.println("LocalVars:");
-	    LocalVars locals = frame.localVars();
-	    for(int i=0; i<3;i++){
-		System.out.println(locals.getInt(i));
-	    }
-	    System.out.println();
-	    System.out.println("OperandStack:");
-	    OperandStack stack = frame.operandStack();
-	    stack.print();
-	    */
+	     * System.out.println(); System.out.println();
+	     * System.out.println("LocalVars:"); LocalVars locals =
+	     * frame.localVars(); for(int i=0; i<3;i++){
+	     * System.out.println(locals.getInt(i)); } System.out.println();
+	     * System.out.println("OperandStack:"); OperandStack stack =
+	     * frame.operandStack(); stack.print();
+	     */
 	}
     }
 }

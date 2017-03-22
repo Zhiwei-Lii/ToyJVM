@@ -15,7 +15,7 @@ public class ClassMember {
     String descriptor;
     Class class_;
 
-    public ClassMember(MemberInfo memberInfo){
+    public ClassMember(MemberInfo memberInfo) {
 	accessFlags = memberInfo.accessFlags();
 	name = memberInfo.name();
 	descriptor = memberInfo.descriptor();

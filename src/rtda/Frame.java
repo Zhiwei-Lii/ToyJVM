@@ -32,11 +32,16 @@ public class Frame {
 	return pc;
     }
 
+    public Method method() {
+	return method;
+    }
+
     public void setPc(int pc) {
 	this.pc = pc;
     }
 
-    public Method method() {
-	return method;
+    public void unrollPc() {
+	this.pc = this.thread.pc();
     }
+
 }

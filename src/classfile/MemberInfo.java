@@ -55,7 +55,7 @@ public class MemberInfo {
 	}
 	return null;
     }
-    
+
     private void setAttributes(ClassReader reader, RawConstantPool cp) {
 	int n = (int) reader.readU2();
 

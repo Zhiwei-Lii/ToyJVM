@@ -12,7 +12,7 @@ public class SIPUSH implements Instruction {
     }
 
     public void execute(Frame frame) {
-	frame.operandStack().pushInt((int)val);
+	frame.operandStack().pushInt((int) val);
     }
 
 }

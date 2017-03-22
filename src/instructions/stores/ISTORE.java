@@ -7,7 +7,7 @@ public class ISTORE extends Index8Instruction {
 
     public void execute(Frame frame) {
 	int val = frame.operandStack().popInt();
-	frame.localVars().setInt((int)index, val);
+	frame.localVars().setInt((int) index, val);
     }
 
 }

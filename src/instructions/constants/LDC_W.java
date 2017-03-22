@@ -1,5 +1,5 @@
 package instructions.constants;
 
-public class LDC_W extends LDC{
+public class LDC_W extends LDC {
 
 }

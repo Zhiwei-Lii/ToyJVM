@@ -34,14 +34,14 @@ public class ClassFile {
     }
 
     public String thisClassName() {
-	ConstantClassInfo c = (ConstantClassInfo)constantPool.getConstantInfo(thisClass);
+	ConstantClassInfo c = (ConstantClassInfo) constantPool.getConstantInfo(thisClass);
 	return constantPool.getUtf8(c.nameIndex);
     }
 
     public String superClassName() {
-	if(!thisClassName().equals("java/lang/Object")){
-            ConstantClassInfo c = (ConstantClassInfo)constantPool.getConstantInfo(superClass);
-            return constantPool.getUtf8(c.nameIndex);
+	if (!thisClassName().equals("java/lang/Object")) {
+	    ConstantClassInfo c = (ConstantClassInfo) constantPool.getConstantInfo(superClass);
+	    return constantPool.getUtf8(c.nameIndex);
 	}
 	return null;
     }
@@ -49,7 +49,7 @@ public class ClassFile {
     public String[] interfaceNames() {
 	String[] interfaceNames = new String[interfaces.length];
 	for (int i = 0; i < interfaceNames.length; i++) {
-            ConstantClassInfo c = (ConstantClassInfo)constantPool.getConstantInfo(interfaces[i]);
+	    ConstantClassInfo c = (ConstantClassInfo) constantPool.getConstantInfo(interfaces[i]);
 	    interfaceNames[i] = constantPool.getUtf8(c.nameIndex);
 	}
 
@@ -60,15 +60,15 @@ public class ClassFile {
 	return constantPool;
     }
 
-    public MemberInfo[] fields(){
+    public MemberInfo[] fields() {
 	return fields;
     }
-    
-    public MemberInfo[] methods(){
+
+    public MemberInfo[] methods() {
 	return methods;
     }
-    
-    public AttributeInfo[] attributes(){
+
+    public AttributeInfo[] attributes() {
 	return attributes;
     }
 

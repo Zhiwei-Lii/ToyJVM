@@ -14,18 +14,24 @@ import rtda.heap.Object;
 
 public class Class {
     int accessFlags;
+
     String name;
     String superClassName;
     String[] interfaceNames;
+
     ConstantPool constantPool;
     Field[] fields;
     Method[] methods;
+
     ClassLoader loader;
     Class superClass;
     Class[] interfaces;
+
     int instanceSlotCount;
     int staticSlotCount;
     Slot[] staticVars;
+
+    boolean initStarted;
 
     public Class(ClassLoader loader, ClassFile cf) {
 	this.accessFlags = cf.accessFlags();
@@ -70,18 +76,6 @@ public class Class {
 	return 0 != (accessFlags & AccessFlags.ACC_ABSTRACT);
     }
 
-    public boolean isSynthetic() {
-	return 0 != (accessFlags & AccessFlags.ACC_SYNTHETIC);
-    }
-
-    public boolean isAnnotation() {
-	return 0 != (accessFlags & AccessFlags.ACC_ANNOTATION);
-    }
-
-    public boolean isEnum() {
-	return 0 != (accessFlags & AccessFlags.ACC_ENUM);
-    }
-
     public String name() {
 	return name;
     }
@@ -104,6 +98,14 @@ public class Class {
 
     public Object newObject() {
 	return new Object(this);
+    }
+
+    public boolean initStarted() {
+	return initStarted;
+    }
+
+    public boolean startInit() {
+	return initStarted = true;
     }
 
     /*
@@ -168,6 +170,10 @@ public class Class {
 
     public Method getMainMethod() {
 	return getStaticMethod("main", "([Ljava/lang/String;)V");
+    }
+
+    public Method getClinitMethod() {
+	return getStaticMethod("<clinit>", "()V");
     }
 
     public Method lookupMethodInClass(String methodName, String descriptor) {

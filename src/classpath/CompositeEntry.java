@@ -6,25 +6,25 @@ public class CompositeEntry implements Entry {
     private ArrayList<Entry> entries = new ArrayList<Entry>();
 
     public CompositeEntry(String pathList) {
-        String[] paths = pathList.split(":|;");
+	String[] paths = pathList.split(":|;");
 
-        for (String path : paths) {
-            Entry entry = EntryFactory.newEntry(path);
-            entries.add(entry);
-        }
+	for (String path : paths) {
+	    Entry entry = EntryFactory.newEntry(path);
+	    entries.add(entry);
+	}
     }
 
     public byte[] readClass(String className) {
-        byte[] result = null;
+	byte[] result = null;
 
-        for (Entry entry : entries) {
-            result = entry.readClass(className);
+	for (Entry entry : entries) {
+	    result = entry.readClass(className);
 
-            if (result != null) { // If readClass succeed
-                return result;
-            }
-        }
+	    if (result != null) { // If readClass succeed
+		return result;
+	    }
+	}
 
-        return result;
+	return result;
     }
 }

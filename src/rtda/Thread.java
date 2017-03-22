@@ -3,7 +3,7 @@ package rtda;
 import java.util.Stack;
 
 public class Thread {
-    private int pc;
+    private int pc; // 这里的pc保留的是frame里的pc的上一个位置 参见Interpreter.java
     private Stack<Frame> stack;
 
     public Thread() {

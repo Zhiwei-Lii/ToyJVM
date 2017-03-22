@@ -7,7 +7,7 @@ public class LocalVars {
 
     public LocalVars(int length) {
 	localVars = new Slot[length];
-	for(int i=0; i<localVars.length; i++){
+	for (int i = 0; i < localVars.length; i++) {
 	    localVars[i] = new Slot();
 	}
     }
@@ -35,8 +35,8 @@ public class LocalVars {
     public Slot getSlot(int index) {
 	return localVars[index];
     }
-    
-    public Slot[] localVars(){
+
+    public Slot[] localVars() {
 	return localVars;
     }
 }

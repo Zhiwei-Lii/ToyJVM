@@ -22,8 +22,8 @@ public class CHECK_CAST extends Index16Instruction {
 	ConstantPool cp = frame.method().class_().constantPool();
 	ConstantClassRef clRef = (ConstantClassRef) cp.getConstant((int) index);
 	Class cl = clRef.class_();
-	
-	if(!ref.isInstanceOf(cl)){
+
+	if (!ref.isInstanceOf(cl)) {
 	    throw new Error("java.lang.ClassCastException");
 	}
     }

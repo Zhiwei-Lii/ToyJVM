@@ -27,7 +27,7 @@ public class Method {
 	    this.maxLocals = ca.maxLocals();
 	    this.code = ca.code();
 	}
-        this.argSlotCount = calcArgSlotCount();
+	this.argSlotCount = calcArgSlotCount();
     }
 
     public String name() {
@@ -62,6 +62,10 @@ public class Method {
 	return 0 != (accessFlags & AccessFlags.ACC_STATIC);
     }
 
+    public boolean isNative() {
+	return 0 != (accessFlags & AccessFlags.ACC_NATIVE);
+    }
+
     /* 解析descriptor来获取参数和返回值的信息 */
     private int calcArgSlotCount() {
 	int count = 0;
@@ -73,7 +77,7 @@ public class Method {
 	if (!isStatic()) {
 	    count++;
 	}
-	
+
 	return count;
     }
 }
