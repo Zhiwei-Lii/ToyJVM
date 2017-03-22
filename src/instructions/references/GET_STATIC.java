@@ -6,7 +6,9 @@ import rtda.OperandStack;
 import rtda.heap.Class;
 import rtda.heap.ConstantPool;
 import rtda.heap.Field;
+import rtda.heap.Method;
 import rtda.heap.constant.ConstantFieldRef;
+import rtda.Thread;
 
 public class GET_STATIC extends Index16Instruction {
 
@@ -27,7 +29,7 @@ public class GET_STATIC extends Index16Instruction {
 	int slotId = field.slotId();
 
 	OperandStack stack = frame.operandStack();
-	
+
 	if (descriptor.contains("I")) {
 	    stack.pushInt((int) cl.staticVars()[slotId].num());
 	} else if (descriptor.contains("L")) {
@@ -38,4 +40,26 @@ public class GET_STATIC extends Index16Instruction {
 
     }
 
+    private void initClass(Thread thread, Class cl) {
+	cl.startInit();
+	scheduleClinit(thread, cl);
+	initSuperClass(thread, cl);
+    }
+
+    private void scheduleClinit(Thread thread, Class cl) {
+	Method clinit = cl.getClinitMethod();
+	if (clinit != null) {
+	    Frame newFrame = new Frame(thread, clinit);
+	    thread.pushFrame(newFrame);
+	}
+    }
+
+    private void initSuperClass(Thread thread, Class cl) {
+	if (!cl.isInterface()) {
+	    Class superClass = cl.superClass();
+	    if (superClass != null && !superClass.initStarted()) {
+		initClass(thread, superClass);
+	    }
+	}
+    }
 }

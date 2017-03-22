@@ -29,6 +29,9 @@ public class Interpreter {
 	    thread.setPc(pc);
 
 	    // decode
+	    if(frame.method().code()==null){
+		System.out.println(frame.method().name());
+	    }
 	    reader.reset(frame.method().code(), pc);
 	    long opcode = reader.readU1();
 	    Instruction inst = InstructionFactory.newInstruction(opcode);
@@ -41,15 +44,6 @@ public class Interpreter {
 	    if (thread.isStackEmpty()) {
 		break;
 	    }
-
-	    /*
-	     * System.out.println(); System.out.println();
-	     * System.out.println("LocalVars:"); LocalVars locals =
-	     * frame.localVars(); for(int i=0; i<3;i++){
-	     * System.out.println(locals.getInt(i)); } System.out.println();
-	     * System.out.println("OperandStack:"); OperandStack stack =
-	     * frame.operandStack(); stack.print();
-	     */
 	}
     }
 }

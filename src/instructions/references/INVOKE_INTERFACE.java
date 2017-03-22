@@ -56,14 +56,16 @@ public class INVOKE_INTERFACE implements Instruction {
 	    }
 	}
 	
+	/*
 	if(method.isNative()){
             if(method.name().equals("registerNatives")){
                 thread.popFrame();
             }
             else{
-                throw new Error("Unsupported")
+                throw new Error("Unsupported");
             }
 	}
+	*/
     }
 
 }

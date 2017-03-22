@@ -5,9 +5,9 @@ import rtda.Frame;
 import rtda.heap.ConstantPool;
 import rtda.heap.Method;
 import rtda.heap.constant.ConstantClassRef;
-import rtda.heap.Class;
 import rtda.heap.Object;
 import rtda.Thread;
+import rtda.heap.Class;
 
 public class NEW extends Index16Instruction {
 
@@ -34,16 +34,16 @@ public class NEW extends Index16Instruction {
 
     private void scheduleClinit(Thread thread, Class cl) {
 	Method clinit = cl.getClinitMethod();
-	if(clinit!=null){
+	if (clinit != null) {
 	    Frame newFrame = new Frame(thread, clinit);
 	    thread.pushFrame(newFrame);
 	}
     }
 
     private void initSuperClass(Thread thread, Class cl) {
-	if(!cl.isInterface()){
+	if (!cl.isInterface()) {
 	    Class superClass = cl.superClass();
-	    if(superClass!=null&&!superClass.initStarted()){
+	    if (superClass != null && !superClass.initStarted()) {
 		initClass(thread, superClass);
 	    }
 	}

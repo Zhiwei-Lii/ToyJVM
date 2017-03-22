@@ -6,7 +6,10 @@ import rtda.OperandStack;
 import rtda.heap.Class;
 import rtda.heap.ConstantPool;
 import rtda.heap.Field;
+import rtda.heap.Method;
 import rtda.heap.constant.ConstantFieldRef;
+import rtda.Thread;
+import rtda.heap.Class;
 
 public class PUT_STATIC extends Index16Instruction {
 
@@ -22,19 +25,17 @@ public class PUT_STATIC extends Index16Instruction {
 	    initClass(frame.thread(), cl);
 	    return;
 	}
-	
+
 	String descriptor = field.descriptor();
 	int slotId = field.slotId();
-	
+
 	OperandStack stack = frame.operandStack();
-	
-	if(descriptor.contains("I")){
+
+	if (descriptor.contains("I")) {
 	    cl.staticVars()[slotId].setNum(stack.popInt());
-	}
-	else if(descriptor.contains("L")){
+	} else if (descriptor.contains("L")) {
 	    cl.staticVars()[slotId].setRef(stack.popRef());
-	}
-	else{
+	} else {
 	    throw new Error("Unsupport");
 	}
     }
@@ -47,16 +48,16 @@ public class PUT_STATIC extends Index16Instruction {
 
     private void scheduleClinit(Thread thread, Class cl) {
 	Method clinit = cl.getClinitMethod();
-	if(clinit!=null){
+	if (clinit != null) {
 	    Frame newFrame = new Frame(thread, clinit);
 	    thread.pushFrame(newFrame);
 	}
     }
 
     private void initSuperClass(Thread thread, Class cl) {
-	if(!cl.isInterface()){
+	if (!cl.isInterface()) {
 	    Class superClass = cl.superClass();
-	    if(superClass!=null&&!superClass.initStarted()){
+	    if (superClass != null && !superClass.initStarted()) {
 		initClass(thread, superClass);
 	    }
 	}

@@ -39,6 +39,15 @@ public class INVOKE_STATIC extends Index16Instruction {
 		newFrame.localVars().setSlot(i, slot);
 	    }
 	}
+
+	if(method.isNative()){
+            if(method.name().equals("registerNatives")){
+                thread.popFrame();
+            }
+            else{
+                throw new Error("Unsupported");
+            }
+	}
     }
 
     private void initClass(Thread thread, Class cl) {
