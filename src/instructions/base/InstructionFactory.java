@@ -23,8 +23,8 @@ import instructions.stack.*;
 public class InstructionFactory {
 
     public static Instruction newInstruction(long opcode) {
-	System.out.printf("The opcode is %x", opcode);
-	System.out.println("");
+	//System.out.printf("The opcode is %x", opcode);
+	//System.out.println("");
 	switch ((int) opcode) {
 	case 0x00:
 	    return new NOP();

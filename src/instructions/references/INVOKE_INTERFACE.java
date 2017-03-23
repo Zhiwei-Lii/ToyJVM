@@ -55,17 +55,6 @@ public class INVOKE_INTERFACE implements Instruction {
 		newFrame.localVars().setSlot(i, slot);
 	    }
 	}
-	
-	/*
-	if(method.isNative()){
-            if(method.name().equals("registerNatives")){
-                thread.popFrame();
-            }
-            else{
-                throw new Error("Unsupported");
-            }
-	}
-	*/
     }
 
 }

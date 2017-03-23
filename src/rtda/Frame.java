@@ -41,7 +41,7 @@ public class Frame {
     }
 
     public void unrollPc() {
-	this.pc = this.thread.pc();
+	this.pc = this.thread.pc(); // thread持有的pc是取指前的pc
     }
 
 }
