@@ -13,6 +13,7 @@ public class Main {
 	Class mainClass = loader.loadClass(className);
 	Method mainMethod = mainClass.getMainMethod();
 	Interpreter.interpret(mainMethod);
+	String s;
     }
 
     public static void main(String[] args) {

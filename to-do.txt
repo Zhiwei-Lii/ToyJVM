@@ -1,3 +1,7 @@
 因为java没有无符号类型, 所以u1 u2 u4全都用long来模拟s, ClassReader类
 不支持double, long, float, short, byte数据类型
 没有实现访问控制
+不支持异常机制
+不支持数组和字符串
+
+目前支持继承,多态, 接口, 方法调用, int的运算和打印
