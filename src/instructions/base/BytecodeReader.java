@@ -5,38 +5,38 @@ public class BytecodeReader {
     int pc;
 
     public void reset(byte[] code, int pc) {
-	this.code = code;
-	this.pc = pc;
+        this.code = code;
+        this.pc = pc;
     }
 
     public BytecodeReader(byte[] code) {
-	this.code = code;
-	this.pc = 0;
+        this.code = code;
+        this.pc = 0;
     }
 
     public long readU1() {
-	return Byte.toUnsignedLong(code[pc++]);
+        return Byte.toUnsignedLong(code[pc++]);
     }
 
     public long readU2() {
-	long high = readU1();
-	long low = readU1();
-	return (high << 8) | low;
+        long high = readU1();
+        long low = readU1();
+        return (high << 8) | low;
     }
 
     public long readU4() {
-	long high = readU2();
-	long low = readU2();
-	return (high << 16) | low;
+        long high = readU2();
+        long low = readU2();
+        return (high << 16) | low;
     }
 
     public void skipPadding() {
-	while (pc % 4 != 0) {
-	    readU1();
-	}
+        while (pc % 4 != 0) {
+            readU1();
+        }
     }
 
     public int pc() {
-	return pc;
+        return pc;
     }
 }

@@ -10,10 +10,10 @@ public class LocalVariableTableEntry {
     long index;
 
     public LocalVariableTableEntry(ClassReader reader) {
-	startPc = reader.readU2();
-	length = reader.readU2();
-	nameIndex = reader.readU2();
-	descriptorIndex = reader.readU2();
-	index = reader.readU2();
+        startPc = reader.readU2();
+        length = reader.readU2();
+        nameIndex = reader.readU2();
+        descriptorIndex = reader.readU2();
+        index = reader.readU2();
     }
 }

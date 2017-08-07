@@ -6,11 +6,11 @@ import rtda.Frame;
 public class IFGE extends BranchInstruction {
 
     public void execute(Frame frame) {
-	int val = frame.operandStack().popInt();
+        int val = frame.operandStack().popInt();
 
-	if (val >= 0) {
-	    branch(frame);
-	}
+        if (val >= 0) {
+            branch(frame);
+        }
     }
 
 }

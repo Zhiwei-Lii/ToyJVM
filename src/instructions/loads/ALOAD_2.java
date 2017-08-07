@@ -6,7 +6,7 @@ import rtda.heap.Object;
 
 public class ALOAD_2 extends NoOperandsInstruction {
     public void execute(Frame frame) {
-	Object ref = frame.localVars().getRef(2);
-	frame.operandStack().pushRef(ref);
+        Object ref = frame.localVars().getRef(2);
+        frame.operandStack().pushRef(ref);
     }
 }

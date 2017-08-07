@@ -16,73 +16,76 @@ public class ConstantInterfaceMethodRef implements Constant {
     String descriptor;
     Method method;
 
-    public ConstantInterfaceMethodRef(ClassLoader loader, RawConstantPool rcp, ConstantInterfaceMethodrefInfo fimri) {
-	this.loader = loader;
+    public ConstantInterfaceMethodRef(ClassLoader loader, RawConstantPool rcp,
+            ConstantInterfaceMethodrefInfo fimri) {
+        this.loader = loader;
 
-	ConstantClassInfo cci = (ConstantClassInfo) rcp.getConstantInfo(fimri.classIndex());
-	this.className = rcp.getUtf8(cci.nameIndex);
+        ConstantClassInfo cci = (ConstantClassInfo) rcp.getConstantInfo(fimri.classIndex());
+        this.className = rcp.getUtf8(cci.nameIndex);
 
-	ConstantNameAndTypeInfo cnati = (ConstantNameAndTypeInfo) rcp.getConstantInfo(fimri.nameAndTypeIndex());
-	this.methodName = rcp.getUtf8(cnati.nameIndex());
-	this.descriptor = rcp.getUtf8(cnati.descriptorIndex());
+        ConstantNameAndTypeInfo cnati =
+                (ConstantNameAndTypeInfo) rcp.getConstantInfo(fimri.nameAndTypeIndex());
+        this.methodName = rcp.getUtf8(cnati.nameIndex());
+        this.descriptor = rcp.getUtf8(cnati.descriptorIndex());
     }
 
     public Method method() {
-	if (this.method == null) {
-	    resolveInterfaceMethodRef();
-	}
+        if (this.method == null) {
+            resolveInterfaceMethodRef();
+        }
 
-	return this.method;
+        return this.method;
     }
 
     public String methodName() {
-	return methodName;
+        return methodName;
     }
 
     public String descriptor() {
-	return descriptor;
+        return descriptor;
     }
 
     private void resolveInterfaceMethodRef() {
-	Class cl = this.loader.loadClass(className);
+        Class cl = this.loader.loadClass(className);
 
-	if (!cl.isInterface()) {
-	    throw new Error("java.lang.IncompatibleClassChangeError");
-	}
+        if (!cl.isInterface()) {
+            throw new Error("java.lang.IncompatibleClassChangeError");
+        }
 
-	Method method = lookupInterfaceMethod(cl, this.methodName, this.descriptor);
-	if (method == null) {
-	    throw new Error("java.lang.NoSuchMethodError");
-	}
+        Method method = lookupInterfaceMethod(cl, this.methodName, this.descriptor);
+        if (method == null) {
+            throw new Error("java.lang.NoSuchMethodError");
+        }
 
-	this.method = method;
+        this.method = method;
     }
 
     private Method lookupInterfaceMethod(Class iface, String methodName, String descriptor) {
-	for (Method m : iface.methods()) {
-	    if (m.name().equals(methodName) && m.descriptor().equals(descriptor)) {
-		return m;
-	    }
-	}
+        for (Method m : iface.methods()) {
+            if (m.name().equals(methodName) && m.descriptor().equals(descriptor)) {
+                return m;
+            }
+        }
 
-	return lookupMethodInInterfaces(iface.interfaces(), methodName, descriptor);
+        return lookupMethodInInterfaces(iface.interfaces(), methodName, descriptor);
     }
 
-    private Method lookupMethodInInterfaces(Class[] interfaces, String methodName, String descriptor) {
-	for (Class iface : interfaces) {
-	    for (Method m : iface.methods()) {
-		if (m.name().equals(methodName) && m.descriptor().equals(descriptor)) {
-		    return m;
-		}
-	    }
+    private Method lookupMethodInInterfaces(Class[] interfaces, String methodName,
+            String descriptor) {
+        for (Class iface : interfaces) {
+            for (Method m : iface.methods()) {
+                if (m.name().equals(methodName) && m.descriptor().equals(descriptor)) {
+                    return m;
+                }
+            }
 
-	    Method m = lookupMethodInInterfaces(iface.interfaces(), methodName, descriptor);
-	    if (m != null) {
-		return m;
-	    }
-	}
+            Method m = lookupMethodInInterfaces(iface.interfaces(), methodName, descriptor);
+            if (m != null) {
+                return m;
+            }
+        }
 
-	return null;
+        return null;
     }
 
 }

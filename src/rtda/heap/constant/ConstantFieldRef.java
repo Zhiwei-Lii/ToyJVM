@@ -17,45 +17,46 @@ public class ConstantFieldRef implements Constant {
     Field field;
 
     public ConstantFieldRef(ClassLoader loader, RawConstantPool rcp, ConstantFieldrefInfo cfri) {
-	ConstantClassInfo cci = (ConstantClassInfo) rcp.getConstantInfo(cfri.classIndex());
-	this.className = rcp.getUtf8(cci.nameIndex);
-	this.loader = loader;
+        ConstantClassInfo cci = (ConstantClassInfo) rcp.getConstantInfo(cfri.classIndex());
+        this.className = rcp.getUtf8(cci.nameIndex);
+        this.loader = loader;
 
-	ConstantNameAndTypeInfo cnati = (ConstantNameAndTypeInfo) rcp.getConstantInfo(cfri.nameAndTypeIndex());
-	this.fieldName = rcp.getUtf8(cnati.nameIndex());
-	this.descriptor = rcp.getUtf8(cnati.descriptorIndex());
+        ConstantNameAndTypeInfo cnati =
+                (ConstantNameAndTypeInfo) rcp.getConstantInfo(cfri.nameAndTypeIndex());
+        this.fieldName = rcp.getUtf8(cnati.nameIndex());
+        this.descriptor = rcp.getUtf8(cnati.descriptorIndex());
     }
 
     public Class class_() {
-	if (cl == null) {
-	    this.cl = loader.loadClass(className);
-	}
-	return cl;
+        if (cl == null) {
+            this.cl = loader.loadClass(className);
+        }
+        return cl;
     }
 
     public Field field() {
-	return lookupField(class_());
+        return lookupField(class_());
     }
 
     private Field lookupField(Class class_) {
-	for (Field f : class_.fields()) {
-	    if (f.name().equals(fieldName) && f.descriptor().equals(descriptor)) {
-		return f;
-	    }
-	}
+        for (Field f : class_.fields()) {
+            if (f.name().equals(fieldName) && f.descriptor().equals(descriptor)) {
+                return f;
+            }
+        }
 
-	for (Class inter : class_.interfaces()) {
-	    Field f = lookupField(inter);
+        for (Class inter : class_.interfaces()) {
+            Field f = lookupField(inter);
 
-	    if (f != null) {
-		return f;
-	    }
-	}
+            if (f != null) {
+                return f;
+            }
+        }
 
-	if (class_.superClass() != null) {
-	    return lookupField(class_.superClass());
-	}
+        if (class_.superClass() != null) {
+            return lookupField(class_.superClass());
+        }
 
-	return null;
+        return null;
     }
 }

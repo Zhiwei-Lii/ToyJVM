@@ -7,6 +7,6 @@ public class ConstantLongInfo extends ConstantInfo {
 
     // 可能出问题
     public ConstantLongInfo(ClassReader reader) {
-	val = reader.readU8();
+        val = reader.readU8();
     }
 }

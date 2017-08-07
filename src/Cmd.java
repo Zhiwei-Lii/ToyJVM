@@ -10,52 +10,56 @@ public class Cmd {
     private int cur;
 
     public Cmd(String[] args) {
-	this.args = args;
+        this.args = args;
     }
 
     public void parseCmd() {
-	while (hasMoreFlags()) {
-	    if (isHelp()) {
-		printUsage();
-		break;
-	    } else if (isClassPath()) {
-		cur++;
-		cpOption = args[cur++];
-	    } else if (isXjre()) {
-		cur++;
-		xJreOption = args[cur++];
-	    } else if (isUndefinedFlag()) {
-		throw new Error("Undefined Flag");
-	    } else {
-		class_ = args[cur++];
-	    }
-	}
+        while (hasMoreFlags()) {
+            if (isHelp()) {
+                printUsage();
+                break;
+            }
+            else if (isClassPath()) {
+                cur++;
+                cpOption = args[cur++];
+            }
+            else if (isXjre()) {
+                cur++;
+                xJreOption = args[cur++];
+            }
+            else if (isUndefinedFlag()) {
+                throw new Error("Undefined Flag");
+            }
+            else {
+                class_ = args[cur++];
+            }
+        }
     }
 
     private void printUsage() {
-	System.out.println("This is a simple version of JVM");
-	System.out.println("  -?/-help");
-	System.out.println("  -cp/-classpath");
+        System.out.println("This is a simple version of JVM");
+        System.out.println("  -?/-help");
+        System.out.println("  -cp/-classpath");
     }
 
     private boolean isHelp() {
-	return args[cur].equals("-?") || args[cur].equals("-help");
+        return args[cur].equals("-?") || args[cur].equals("-help");
     }
 
     private boolean isClassPath() {
-	return args[cur].equals("-cp") || args[cur].equals("-classpath");
+        return args[cur].equals("-cp") || args[cur].equals("-classpath");
     }
 
     private boolean isXjre() {
-	return args[cur].equals("-Xjre");
+        return args[cur].equals("-Xjre");
     }
 
     private boolean isUndefinedFlag() {
-	return args[cur].startsWith("-");
+        return args[cur].startsWith("-");
     }
 
     private boolean hasMoreFlags() {
-	return cur < args.length;
+        return cur < args.length;
     }
 
 }

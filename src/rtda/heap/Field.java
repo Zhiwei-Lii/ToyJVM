@@ -11,34 +11,34 @@ public class Field {
     int slotId;
 
     public Field(Class class_, MemberInfo memberInfo) {
-	this.accessFlags = memberInfo.accessFlags();
-	this.name = memberInfo.name();
-	this.descriptor = memberInfo.descriptor();
-	this.class_ = class_;
+        this.accessFlags = memberInfo.accessFlags();
+        this.name = memberInfo.name();
+        this.descriptor = memberInfo.descriptor();
+        this.class_ = class_;
 
-	/* 如果该field有初始值 */
-	if (memberInfo.constantValueAttribute() != null) {
-	    this.constantValueIndex = memberInfo.constantValueAttribute().constantValueIndex();
-	}
+        /* 如果该field有初始值 */
+        if (memberInfo.constantValueAttribute() != null) {
+            this.constantValueIndex = memberInfo.constantValueAttribute().constantValueIndex();
+        }
     }
 
     public String name() {
-	return name;
+        return name;
     }
 
     public String descriptor() {
-	return descriptor;
+        return descriptor;
     }
 
     public int slotId() {
-	return slotId;
+        return slotId;
     }
 
     public boolean isStatic() {
-	return 0 != (accessFlags & AccessFlags.ACC_STATIC);
+        return 0 != (accessFlags & AccessFlags.ACC_STATIC);
     }
 
     public boolean isFinal() {
-	return 0 != (accessFlags & AccessFlags.ACC_FINAL);
+        return 0 != (accessFlags & AccessFlags.ACC_FINAL);
     }
 }

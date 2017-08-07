@@ -9,12 +9,12 @@ public class IINC implements Instruction {
     int constant;
 
     public void fetchOperands(BytecodeReader reader) {
-	index = (int) reader.readU1();
-	constant = (int) reader.readU1();
+        index = (int) reader.readU1();
+        constant = (int) reader.readU1();
     }
 
     public void execute(Frame frame) {
-	int val = frame.localVars().getInt(index);
-	frame.localVars().setInt(index, val + constant);
+        int val = frame.localVars().getInt(index);
+        frame.localVars().setInt(index, val + constant);
     }
 }

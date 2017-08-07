@@ -10,38 +10,38 @@ public class Frame {
     int pc;
 
     public Frame(Thread thread, Method method) {
-	this.thread = thread;
-	this.method = method;
-	this.localVars = new LocalVars(method.maxLocals());
-	this.operandStack = new OperandStack(method.maxStack());
+        this.thread = thread;
+        this.method = method;
+        this.localVars = new LocalVars(method.maxLocals());
+        this.operandStack = new OperandStack(method.maxStack());
     }
 
     public LocalVars localVars() {
-	return localVars;
+        return localVars;
     }
 
     public OperandStack operandStack() {
-	return operandStack;
+        return operandStack;
     }
 
     public Thread thread() {
-	return thread;
+        return thread;
     }
 
     public int pc() {
-	return pc;
+        return pc;
     }
 
     public Method method() {
-	return method;
+        return method;
     }
 
     public void setPc(int pc) {
-	this.pc = pc;
+        this.pc = pc;
     }
 
     public void unrollPc() {
-	this.pc = this.thread.pc(); // thread持有的pc是取指前的pc
+        this.pc = this.thread.pc(); // thread持有的pc是取指前的pc
     }
 
 }

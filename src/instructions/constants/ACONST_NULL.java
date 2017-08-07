@@ -6,6 +6,6 @@ import rtda.Frame;
 public class ACONST_NULL extends NoOperandsInstruction {
 
     public void execute(Frame frame) {
-	frame.operandStack().pushRef(null);
+        frame.operandStack().pushRef(null);
     }
 }

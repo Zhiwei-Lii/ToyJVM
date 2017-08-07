@@ -10,24 +10,23 @@ public class RawConstantPool {
     ConstantInfo[] constantInfos;
 
     public RawConstantPool(ClassReader reader) {
-	int n = (int) reader.readU2();
+        int n = (int) reader.readU2();
 
-	constantInfos = new ConstantInfo[n];
+        constantInfos = new ConstantInfo[n];
 
-	/*
-	 * according to the spec, 0 is an invalid index long_info, double_info
-	 * will cost two indexes
-	 */
-	for (int i = 1; i < n; i++) {
-	    constantInfos[i] = ConstantFactory.newConstantInfo(reader, this);
-	    if (isDouble(constantInfos[i]) || isLong(constantInfos[i])) {
-		i++;
-	    }
-	}
+        /*
+         * according to the spec, 0 is an invalid index long_info, double_info will cost two indexes
+         */
+        for (int i = 1; i < n; i++) {
+            constantInfos[i] = ConstantFactory.newConstantInfo(reader, this);
+            if (isDouble(constantInfos[i]) || isLong(constantInfos[i])) {
+                i++;
+            }
+        }
     }
 
     public ConstantInfo getConstantInfo(long index) {
-	return constantInfos[(int) index];
+        return constantInfos[(int) index];
     }
 
     /**
@@ -36,12 +35,12 @@ public class RawConstantPool {
      * @return the str form of constantUtf8
      */
     public String getUtf8(long index) {
-	ConstantUtf8Info utf8 = (ConstantUtf8Info) getConstantInfo(index);
-	return utf8.string();
+        ConstantUtf8Info utf8 = (ConstantUtf8Info) getConstantInfo(index);
+        return utf8.string();
     }
 
     public ConstantInfo[] constantInfos() {
-	return constantInfos;
+        return constantInfos;
     }
 
     /*
@@ -55,10 +54,10 @@ public class RawConstantPool {
      */
 
     private boolean isDouble(ConstantInfo c) {
-	return c instanceof ConstantDoubleInfo;
+        return c instanceof ConstantDoubleInfo;
     }
 
     private boolean isLong(ConstantInfo c) {
-	return c instanceof ConstantLongInfo;
+        return c instanceof ConstantLongInfo;
     }
 }

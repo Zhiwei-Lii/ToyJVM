@@ -13,18 +13,25 @@ public class Slot {
     Object ref;
 
     public void setNum(int num) {
-	this.num = num;
+        this.num = num;
     }
 
     public void setRef(Object ref) {
-	this.ref = ref;
+        this.ref = ref;
     }
 
     public long num() {
-	return num;
+        return num;
     }
 
     public Object ref() {
-	return ref;
+        return ref;
+    }
+    
+    public Slot clone() {
+        Slot newSlot = new Slot();
+        newSlot.num = num;
+        newSlot.ref = ref;
+        return newSlot;
     }
 }

@@ -16,8 +16,8 @@ public class ClassMember {
     Class class_;
 
     public ClassMember(MemberInfo memberInfo) {
-	accessFlags = memberInfo.accessFlags();
-	name = memberInfo.name();
-	descriptor = memberInfo.descriptor();
+        accessFlags = memberInfo.accessFlags();
+        name = memberInfo.name();
+        descriptor = memberInfo.descriptor();
     }
 }

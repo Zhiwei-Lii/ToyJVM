@@ -7,10 +7,10 @@ public class ConstantIntegerInfo extends ConstantInfo {
     long val;
 
     public ConstantIntegerInfo(ClassReader reader) {
-	val = reader.readU4();
+        val = reader.readU4();
     }
 
     public int value() {
-	return (int) val;
+        return (int) val;
     }
 }

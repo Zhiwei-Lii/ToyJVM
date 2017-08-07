@@ -6,7 +6,7 @@ import rtda.Frame;
 public class ICONST_0 extends NoOperandsInstruction {
 
     public void execute(Frame frame) {
-	frame.operandStack().pushInt(0);
+        frame.operandStack().pushInt(0);
     }
 
 }

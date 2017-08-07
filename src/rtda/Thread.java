@@ -7,31 +7,31 @@ public class Thread {
     private Stack<Frame> stack;
 
     public Thread() {
-	pc = 0;
-	stack = new Stack<Frame>();
+        pc = 0;
+        stack = new Stack<Frame>();
     }
 
     public int pc() {
-	return pc;
+        return pc;
     }
 
     public void setPc(int pc) {
-	this.pc = pc;
+        this.pc = pc;
     }
 
     public void pushFrame(Frame frame) {
-	stack.push(frame);
+        stack.push(frame);
     }
 
     public Frame popFrame() {
-	return stack.pop();
+        return stack.pop();
     }
 
     public Frame topFrame() {
-	return stack.peek();
+        return stack.peek();
     }
 
     public boolean isStackEmpty() {
-	return stack.isEmpty();
+        return stack.isEmpty();
     }
 }

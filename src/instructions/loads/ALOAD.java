@@ -7,8 +7,8 @@ import rtda.heap.Object;
 public class ALOAD extends Index8Instruction {
 
     public void execute(Frame frame) {
-	Object ref = frame.localVars().getRef((int) index);
-	frame.operandStack().pushRef(ref);
+        Object ref = frame.localVars().getRef((int) index);
+        frame.operandStack().pushRef(ref);
     }
 
 }

@@ -8,15 +8,15 @@ public class ConstantMemberrefInfo extends ConstantInfo {
     long nameAndTypeIndex;
 
     public ConstantMemberrefInfo(ClassReader reader) {
-	classIndex = reader.readU2();
-	nameAndTypeIndex = reader.readU2();
+        classIndex = reader.readU2();
+        nameAndTypeIndex = reader.readU2();
     }
 
     public long classIndex() {
-	return classIndex;
+        return classIndex;
     }
 
     public long nameAndTypeIndex() {
-	return nameAndTypeIndex;
+        return nameAndTypeIndex;
     }
 }

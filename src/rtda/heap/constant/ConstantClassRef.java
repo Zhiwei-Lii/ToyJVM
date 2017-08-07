@@ -11,15 +11,15 @@ public class ConstantClassRef implements Constant {
     Class cl;
 
     public ConstantClassRef(ClassLoader loader, RawConstantPool rcp, ConstantClassInfo cli) {
-	this.className = rcp.getUtf8(cli.nameIndex);
-	this.loader = loader;
+        this.className = rcp.getUtf8(cli.nameIndex);
+        this.loader = loader;
     }
 
     public Class class_() {
-	if (cl == null) {
-	    this.cl = loader.loadClass(className);
-	}
-	return cl;
+        if (cl == null) {
+            this.cl = loader.loadClass(className);
+        }
+        return cl;
     }
 
 }

@@ -2,9 +2,9 @@ package classfile.attribute;
 
 import classfile.ClassReader;
 
-//test
+// test
 public class SyntheticAttribute extends AttributeInfo {
     public SyntheticAttribute(ClassReader reader) {
-	reader.readU4();
+        reader.readU4();
     }
 }

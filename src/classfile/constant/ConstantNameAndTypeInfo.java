@@ -8,15 +8,15 @@ public class ConstantNameAndTypeInfo extends ConstantInfo {
     long descriptorIndex;
 
     public ConstantNameAndTypeInfo(ClassReader reader) {
-	nameIndex = reader.readU2();
-	descriptorIndex = reader.readU2();
+        nameIndex = reader.readU2();
+        descriptorIndex = reader.readU2();
     }
 
     public long nameIndex() {
-	return nameIndex;
+        return nameIndex;
     }
 
     public long descriptorIndex() {
-	return descriptorIndex;
+        return descriptorIndex;
     }
 }

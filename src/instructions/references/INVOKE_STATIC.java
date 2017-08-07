@@ -12,65 +12,65 @@ import rtda.heap.constant.ConstantMethodRef;
 public class INVOKE_STATIC extends Index16Instruction {
 
     public void execute(Frame frame) {
-	ConstantPool cp = frame.method().class_().constantPool();
-	ConstantMethodRef methodRef = (ConstantMethodRef) cp.getConstant((int) index);
+        ConstantPool cp = frame.method().class_().constantPool();
+        ConstantMethodRef methodRef = (ConstantMethodRef) cp.getConstant((int) index);
 
-	Class cl = methodRef.class_();
-	if (!cl.initStarted()) {
-	    frame.unrollPc();
-	    initClass(frame.thread(), cl);
-	    return;
-	}
+        Class cl = methodRef.class_();
+        if (!cl.initStarted()) {
+            frame.unrollPc();
+            initClass(frame.thread(), cl);
+            return;
+        }
 
-	Method method = methodRef.method();
-	invokeMethod(frame, method);
+        Method method = methodRef.method();
+        invokeMethod(frame, method);
     }
 
     private void invokeMethod(Frame invokerFrame, Method method) {
-	Thread thread = invokerFrame.thread();
-	Frame newFrame = new Frame(thread, method);
-	thread.pushFrame(newFrame);
+        Thread thread = invokerFrame.thread();
+        Frame newFrame = new Frame(thread, method);
+        thread.pushFrame(newFrame);
 
-	int argSlotCount = method.argSlotCount();
+        int argSlotCount = method.argSlotCount();
 
-	if (argSlotCount > 0) {
-	    for (int i = argSlotCount - 1; i >= 0; i--) {
-		Slot slot = invokerFrame.operandStack().popSlot();
-		newFrame.localVars().setSlot(i, slot);
-	    }
-	}
+        if (argSlotCount > 0) {
+            for (int i = argSlotCount - 1; i >= 0; i--) {
+                Slot slot = invokerFrame.operandStack().popSlot();
+                newFrame.localVars().setSlot(i, slot);
+            }
+        }
 
-	if(method.isNative()){
-            if(method.name().equals("registerNatives")){
+        if (method.isNative()) {
+            if (method.name().equals("registerNatives")) {
                 thread.popFrame();
             }
-            else{
+            else {
                 throw new Error("Unsupported");
             }
-	}
+        }
     }
 
     private void initClass(Thread thread, Class cl) {
-	cl.startInit();
-	scheduleClinit(thread, cl);
-	initSuperClass(thread, cl);
+        cl.startInit();
+        scheduleClinit(thread, cl);
+        initSuperClass(thread, cl);
     }
 
     private void scheduleClinit(Thread thread, Class cl) {
-	Method clinit = cl.getClinitMethod();
-	if (clinit != null) {
-	    Frame newFrame = new Frame(thread, clinit);
-	    thread.pushFrame(newFrame);
-	}
+        Method clinit = cl.getClinitMethod();
+        if (clinit != null) {
+            Frame newFrame = new Frame(thread, clinit);
+            thread.pushFrame(newFrame);
+        }
     }
 
     private void initSuperClass(Thread thread, Class cl) {
-	if (!cl.isInterface()) {
-	    Class superClass = cl.superClass();
-	    if (superClass != null && !superClass.initStarted()) {
-		initClass(thread, superClass);
-	    }
-	}
+        if (!cl.isInterface()) {
+            Class superClass = cl.superClass();
+            if (superClass != null && !superClass.initStarted()) {
+                initClass(thread, superClass);
+            }
+        }
     }
 
 }

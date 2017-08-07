@@ -34,78 +34,78 @@ public class Class {
     boolean initStarted;
 
     public Class(ClassLoader loader, ClassFile cf) {
-	this.accessFlags = cf.accessFlags();
-	this.name = cf.thisClassName();
-	this.loader = loader;
-	this.superClassName = cf.superClassName();
-	this.interfaceNames = cf.interfaceNames();
-	this.constantPool = new ConstantPool(this, cf.rawConstantPool());
-	this.fields = newFields(cf);
-	this.methods = newMethods(cf);
+        this.accessFlags = cf.accessFlags();
+        this.name = cf.thisClassName();
+        this.loader = loader;
+        this.superClassName = cf.superClassName();
+        this.interfaceNames = cf.interfaceNames();
+        this.constantPool = new ConstantPool(this, cf.rawConstantPool());
+        this.fields = newFields(cf);
+        this.methods = newMethods(cf);
 
-	/*
-	 * staticVars和fields等的初始化在ClassLoader中 fields是包括static在内的所有field
-	 */
+        /*
+         * staticVars和fields等的初始化在ClassLoader中 fields是包括static在内的所有field
+         */
     }
 
     public Class[] interfaces() {
-	return interfaces;
+        return interfaces;
     }
 
     public Class superClass() {
-	return superClass;
+        return superClass;
     }
 
     public boolean isPublic() {
-	return 0 != (accessFlags & AccessFlags.ACC_PUBLIC);
+        return 0 != (accessFlags & AccessFlags.ACC_PUBLIC);
     }
 
     public boolean isFinal() {
-	return 0 != (accessFlags & AccessFlags.ACC_FINAL);
+        return 0 != (accessFlags & AccessFlags.ACC_FINAL);
     }
 
     public boolean isSuper() {
-	return 0 != (accessFlags & AccessFlags.ACC_SUPER);
+        return 0 != (accessFlags & AccessFlags.ACC_SUPER);
     }
 
     public boolean isInterface() {
-	return 0 != (accessFlags & AccessFlags.ACC_INTERFACE);
+        return 0 != (accessFlags & AccessFlags.ACC_INTERFACE);
     }
 
     public boolean isAbstract() {
-	return 0 != (accessFlags & AccessFlags.ACC_ABSTRACT);
+        return 0 != (accessFlags & AccessFlags.ACC_ABSTRACT);
     }
 
     public String name() {
-	return name;
+        return name;
     }
 
     public Field[] fields() {
-	return fields;
+        return fields;
     }
 
     public Method[] methods() {
-	return methods;
+        return methods;
     }
 
     public Slot[] staticVars() {
-	return staticVars;
+        return staticVars;
     }
 
     public ConstantPool constantPool() {
-	return constantPool;
+        return constantPool;
     }
 
     public Object newObject() {
-	return new Object(this);
+        return new Object(this);
     }
 
     public boolean initStarted() {
-	return initStarted;
+        return initStarted;
     }
 
     public boolean startInit() {
-	return initStarted = true;
+        return initStarted = true;
     }
 
     /*
@@ -113,107 +113,108 @@ public class Class {
      */
 
     public boolean isAssignableFrom(Class cl) {
-	if (name.equals(cl.name)) {
-	    return true;
-	}
+        if (name.equals(cl.name)) {
+            return true;
+        }
 
-	if (!isInterface()) {
-	    return cl.isSubClassOf(this);
-	} else {
-	    return cl.isImplements(this);
-	}
+        if (!isInterface()) {
+            return cl.isSubClassOf(this);
+        }
+        else {
+            return cl.isImplements(this);
+        }
     }
 
     public boolean isSuperClassOf(Class other) {
-	return other.isSubClassOf(this);
+        return other.isSubClassOf(this);
     }
 
     private boolean isSubClassOf(Class cl) {
-	if (this.superClass == null) {
-	    return false;
-	}
+        if (this.superClass == null) {
+            return false;
+        }
 
-	if (this.superClass.name.equals(cl.name)) {
-	    return true;
-	}
+        if (this.superClass.name.equals(cl.name)) {
+            return true;
+        }
 
-	if (this.superClass != null) {
-	    return this.superClass.isSubClassOf(cl);
-	}
+        if (this.superClass != null) {
+            return this.superClass.isSubClassOf(cl);
+        }
 
-	return false;
+        return false;
     }
 
     private boolean isImplements(Class iface) {
-	for (Class inter : this.interfaces) {
-	    if (inter.name.equals(iface.name) || inter.isSubInterfaceOf(iface)) {
-		return true;
-	    }
-	}
+        for (Class inter : this.interfaces) {
+            if (inter.name.equals(iface.name) || inter.isSubInterfaceOf(iface)) {
+                return true;
+            }
+        }
 
-	if (this.superClass != null) {
-	    return this.superClass.isImplements(iface);
-	}
+        if (this.superClass != null) {
+            return this.superClass.isImplements(iface);
+        }
 
-	return false;
+        return false;
     }
 
     private boolean isSubInterfaceOf(Class iface) {
-	for (Class superInterface : this.interfaces) {
-	    if (superInterface.name.equals(iface.name) || superInterface.isSubClassOf(iface)) {
-		return true;
-	    }
-	}
+        for (Class superInterface : this.interfaces) {
+            if (superInterface.name.equals(iface.name) || superInterface.isSubClassOf(iface)) {
+                return true;
+            }
+        }
 
-	return false;
+        return false;
     }
 
     public Method getMainMethod() {
-	return getStaticMethod("main", "([Ljava/lang/String;)V");
+        return getStaticMethod("main", "([Ljava/lang/String;)V");
     }
 
     public Method getClinitMethod() {
-	return getStaticMethod("<clinit>", "()V");
+        return getStaticMethod("<clinit>", "()V");
     }
 
     public Method lookupMethodInClass(String methodName, String descriptor) {
-	for (Method m : methods()) {
-	    if (m.name().equals(methodName) && m.descriptor().equals(descriptor)) {
-		return m;
-	    }
-	}
+        for (Method m : methods()) {
+            if (m.name().equals(methodName) && m.descriptor().equals(descriptor)) {
+                return m;
+            }
+        }
 
-	if (superClass != null) {
-	    return superClass.lookupMethodInClass(methodName, descriptor);
-	}
+        if (superClass != null) {
+            return superClass.lookupMethodInClass(methodName, descriptor);
+        }
 
-	return null;
+        return null;
     }
 
     private Method getStaticMethod(String name, String descriptor) {
-	for (Method m : methods) {
-	    if (m.descriptor.equals(descriptor) && m.name.equals(name) && m.isStatic()) {
-		return m;
-	    }
-	}
+        for (Method m : methods) {
+            if (m.descriptor.equals(descriptor) && m.name.equals(name) && m.isStatic()) {
+                return m;
+            }
+        }
 
-	return null;
+        return null;
     }
 
     private Field[] newFields(ClassFile cf) {
-	Field[] fs = new Field[cf.fields().length];
-	for (int i = 0; i < fs.length; i++) {
-	    fs[i] = new Field(this, cf.fields()[i]);
-	}
-	return fs;
+        Field[] fs = new Field[cf.fields().length];
+        for (int i = 0; i < fs.length; i++) {
+            fs[i] = new Field(this, cf.fields()[i]);
+        }
+        return fs;
     }
 
     private Method[] newMethods(ClassFile cf) {
-	Method[] ms = new Method[cf.methods().length];
-	for (int i = 0; i < ms.length; i++) {
-	    ms[i] = new Method(this, cf.methods()[i]);
-	}
-	return ms;
+        Method[] ms = new Method[cf.methods().length];
+        for (int i = 0; i < ms.length; i++) {
+            ms[i] = new Method(this, cf.methods()[i]);
+        }
+        return ms;
     }
 
 }

@@ -7,7 +7,7 @@ public class LineNumberTableEntry {
     long lineNumber;
 
     public LineNumberTableEntry(ClassReader reader) {
-	startPc = reader.readU2();
-	lineNumber = reader.readU2();
+        startPc = reader.readU2();
+        lineNumber = reader.readU2();
     }
 }

@@ -20,45 +20,45 @@ public class ConstantFactory {
     static final int CONSTANT_InvokeDynamic = 18;
 
     public static ConstantInfo newConstantInfo(ClassReader reader, RawConstantPool cp) {
-	int tag = (int) reader.readU1();
+        int tag = (int) reader.readU1();
 
-	switch (tag) {
-	case CONSTANT_Class: {
-	    return new ConstantClassInfo(reader);
-	}
-	case CONSTANT_Fieldref: {
-	    return new ConstantFieldrefInfo(reader);
-	}
-	case CONSTANT_Methodref: {
-	    return new ConstantMethodrefInfo(reader);
-	}
-	case CONSTANT_InterfaceMethodref: {
-	    return new ConstantInterfaceMethodrefInfo(reader);
-	}
-	case CONSTANT_String: {
-	    return new ConstantStringInfo(reader);
-	}
-	case CONSTANT_Integer: {
-	    return new ConstantIntegerInfo(reader);
-	}
-	case CONSTANT_Float: {
-	    return new ConstantFloatInfo(reader);
-	}
-	case CONSTANT_Long: {
-	    return new ConstantLongInfo(reader);
-	}
-	case CONSTANT_Double: {
-	    return new ConstantDoubleInfo(reader);
-	}
-	case CONSTANT_NameAndType: {
-	    return new ConstantNameAndTypeInfo(reader);
-	}
-	case CONSTANT_Utf8: {
-	    return new ConstantUtf8Info(reader);
-	}
-	default: {
-	    throw new Error("ConstantFactory :: unSupported constant");
-	}
-	}
+        switch (tag) {
+            case CONSTANT_Class: {
+                return new ConstantClassInfo(reader);
+            }
+            case CONSTANT_Fieldref: {
+                return new ConstantFieldrefInfo(reader);
+            }
+            case CONSTANT_Methodref: {
+                return new ConstantMethodrefInfo(reader);
+            }
+            case CONSTANT_InterfaceMethodref: {
+                return new ConstantInterfaceMethodrefInfo(reader);
+            }
+            case CONSTANT_String: {
+                return new ConstantStringInfo(reader);
+            }
+            case CONSTANT_Integer: {
+                return new ConstantIntegerInfo(reader);
+            }
+            case CONSTANT_Float: {
+                return new ConstantFloatInfo(reader);
+            }
+            case CONSTANT_Long: {
+                return new ConstantLongInfo(reader);
+            }
+            case CONSTANT_Double: {
+                return new ConstantDoubleInfo(reader);
+            }
+            case CONSTANT_NameAndType: {
+                return new ConstantNameAndTypeInfo(reader);
+            }
+            case CONSTANT_Utf8: {
+                return new ConstantUtf8Info(reader);
+            }
+            default: {
+                throw new Error("ConstantFactory :: unSupported constant");
+            }
+        }
     }
 }

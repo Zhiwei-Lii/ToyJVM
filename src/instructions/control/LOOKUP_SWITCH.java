@@ -9,25 +9,26 @@ public class LOOKUP_SWITCH extends BranchInstruction {
     long npairs;
     long[] matchOffsets;
 
+    // key, value, key, value, ...
     public void fetchOperands(BytecodeReader reader) {
-	reader.skipPadding();
-	defaultOffset = reader.readU4();
-	npairs = reader.readU4();
+        reader.skipPadding();
+        defaultOffset = reader.readU4();
+        npairs = reader.readU4();
 
-	for (int i = 0; i < npairs * 2; i++) {
-	    matchOffsets[i] = reader.readU4();
-	}
+        for (int i = 0; i < npairs * 2; i++) {
+            matchOffsets[i] = reader.readU4();
+        }
     }
 
     public void execute(Frame frame) {
-	int key = frame.operandStack().popInt();
-	for (int i = 0; i < npairs * 2; i = i + 2) {
-	    if (matchOffsets[i] == key) {
-		offset = (short) matchOffsets[i + 1];
-		break;
-	    }
-	}
+        int key = frame.operandStack().popInt();
+        for (int i = 0; i < npairs * 2; i = i + 2) {
+            if (matchOffsets[i] == key) {
+                offset = (short) matchOffsets[i + 1];
+                break;
+            }
+        }
 
-	branch(frame);
+        branch(frame);
     }
 }

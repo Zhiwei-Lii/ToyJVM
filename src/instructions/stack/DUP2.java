@@ -7,10 +7,10 @@ import rtda.Slot;
 public class DUP2 extends NoOperandsInstruction {
 
     public void execute(Frame frame) {
-	Slot slot = frame.operandStack().popSlot();
-	frame.operandStack().pushSlot(slot);
-	frame.operandStack().pushSlot(slot);
-	frame.operandStack().pushSlot(slot);
+        Slot slot = frame.operandStack().popSlot();
+        frame.operandStack().pushSlot(slot.clone());
+        frame.operandStack().pushSlot(slot.clone());
+        frame.operandStack().pushSlot(slot.clone());
     }
 
 }

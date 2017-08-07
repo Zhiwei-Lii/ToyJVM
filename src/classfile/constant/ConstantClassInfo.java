@@ -7,7 +7,7 @@ public class ConstantClassInfo extends ConstantInfo {
     public long nameIndex;
 
     public ConstantClassInfo(ClassReader reader) {
-	nameIndex = reader.readU2();
+        nameIndex = reader.readU2();
     }
 
 }

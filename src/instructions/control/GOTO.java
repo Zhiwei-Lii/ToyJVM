@@ -6,7 +6,7 @@ import rtda.Frame;
 public class GOTO extends BranchInstruction {
 
     public void execute(Frame frame) {
-	branch(frame);
+        branch(frame);
     }
 
 }

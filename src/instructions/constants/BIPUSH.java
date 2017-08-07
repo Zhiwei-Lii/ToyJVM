@@ -8,11 +8,11 @@ public class BIPUSH implements Instruction {
     long val;
 
     public void fetchOperands(BytecodeReader reader) {
-	val = reader.readU1();
+        val = reader.readU1();
     }
 
     public void execute(Frame frame) {
-	frame.operandStack().pushInt((int) val);
+        frame.operandStack().pushInt((int) val);
     }
 
 }

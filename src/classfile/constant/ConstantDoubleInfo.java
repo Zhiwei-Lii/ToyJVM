@@ -7,7 +7,7 @@ public class ConstantDoubleInfo extends ConstantInfo {
     double val;
 
     public ConstantDoubleInfo(ClassReader reader) {
-	long bits = reader.readU8();
-	val = Double.longBitsToDouble(bits);
+        long bits = reader.readU8();
+        val = Double.longBitsToDouble(bits);
     }
 }

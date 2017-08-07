@@ -4,6 +4,6 @@ public abstract class Index16Instruction implements Instruction {
     protected long index;
 
     public void fetchOperands(BytecodeReader reader) {
-	index = reader.readU2();
+        index = reader.readU2();
     }
 }

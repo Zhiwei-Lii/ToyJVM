@@ -8,11 +8,11 @@ public class SIPUSH implements Instruction {
     long val;
 
     public void fetchOperands(BytecodeReader reader) {
-	val = reader.readU2();
+        val = reader.readU2();
     }
 
     public void execute(Frame frame) {
-	frame.operandStack().pushInt((int) val);
+        frame.operandStack().pushInt((int) val);
     }
 
 }

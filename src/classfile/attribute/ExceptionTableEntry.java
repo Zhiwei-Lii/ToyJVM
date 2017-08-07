@@ -9,9 +9,9 @@ public class ExceptionTableEntry {
     long catchType;
 
     public ExceptionTableEntry(ClassReader reader) {
-	startPc = reader.readU2();
-	endPc = reader.readU2();
-	handlerPc = reader.readU2();
-	catchType = reader.readU2();
+        startPc = reader.readU2();
+        endPc = reader.readU2();
+        handlerPc = reader.readU2();
+        catchType = reader.readU2();
     }
 }
