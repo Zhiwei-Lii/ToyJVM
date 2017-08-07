@@ -26,7 +26,7 @@ public class INVOKE_VIRTUAL extends Index16Instruction {
             if (methodRef.methodName().equals("println")) {
                 String descriptor = methodRef.descriptor();
                 if (descriptor.equals("(I)V")) {
-                    System.out.println("print result -> " + frame.operandStack().popInt());
+                    System.out.println(frame.operandStack().popInt());
                 }
 
                 frame.operandStack().popRef();
