@@ -1,3 +1,3 @@
 # ToyJVM
-A java version of JVM.go (https://github.com/zxh0/jvm.go)    
+A java version of JVM.go (https://github.com/zxh0/jvmgo-book)    
 Just for study and practise
